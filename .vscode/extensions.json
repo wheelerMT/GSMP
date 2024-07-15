@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "jebbs.plantuml",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-dotnettools.csharp",
+        "jorgeserrano.vscode-csharp-snippets",
+        "esbenp.prettier-vscode",
+        "sonarsource.sonarlint-vscode",
+        "streetsidesoftware.code-spell-checker"
+    ]
+}

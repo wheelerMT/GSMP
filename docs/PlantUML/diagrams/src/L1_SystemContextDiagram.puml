@@ -1,0 +1,26 @@
+@startuml SMP System Context Diagram
+
+!theme C4_united from <C4/themes>
+!include <C4/C4_Context>
+
+Person(User,"User", "An Engineer Simulating Models.")
+'System(Interface, "User Interface", "Manages User Interactions. Optionally, create/edit input Model Lists or Test Scripts.","","","","CLI, GUI, API")
+System(SMP, "Simulation Modelling Platform","Manages all instantiated Models/Model Backends from Model List. Manages consolidated Model Interfaces.","","","","Software System")
+'System(ScriptingEngine,"Scripting Engine", "Reads and executes **User** provided **Scripts** defining the **Models** and Test Case to be Simulated.","","","","??? TCL, LUA, C# etc ??")
+'System(Example1,"Results Server")
+'System(Example2,"Model Database")
+'System(Example3,"Scenario Database")
+
+Rel(User, SMP, "Uses")
+'Rel_D(SMP, Example1, "Stores Output")
+'Rel_D(SMP, Example2, "Gets Models")
+'Rel_D(SMP, Example3, "Get Scenarios")
+'Rel_R(Interface, SMP, "Instantiates", "Model List, Test Script")
+'Rel_R(Interface, SMP, "Calls", "Start, Pause, Stop")
+'Rel_R(SMP, ScriptingEngine, "Instantiates", "Model List, Test Script")
+'Rel_R(ScriptingEngine, SMP, "Calls", "Model Platform")
+
+'System(GUI, "Graphical User Interface", "Select Models\nSelect Script\nConfigure Options\n")
+'System(CLI, "Command Line Interface", "Optional Description")
+
+@enduml
