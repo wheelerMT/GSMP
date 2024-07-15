@@ -1,0 +1,26 @@
+@startuml SMP Container Diagram
+
+!theme C4_united from <C4/themes>
+!include <C4/C4_Container>
+
+Person(User,"User", "An Engineer Simulating Models.")
+
+System_Boundary(SMP, "Simulation Modelling Platform") {
+    Container(UserInterface, "User Interface", "CLI, API, GUI", "Handles User Interactions with **Model Platform** and **Scripting Engine**. Optionally, allows user to configure and edit input files and **Model Platform** options.", )
+    Container(ScriptingEngine,"Scripting Engine", "<?> LUA, TCL <?>", "Parses input files used to drive **Model Platform Manager**. Checks validity of input files.\n\nModel List: Defines source and backend type of all models.\n\nTest Script: Uses custom commands to control simulation e.g. wait, set, check")
+    Container(ModelPlatform, "Model Platform", "C#", "Manages collection of Models. Manages consolidated Model Interfaces.")
+    'Container(ModelManager, "Model Manager", "", "Interface between Model Platform and Model Backends. Instantiates and manages interactions with all Model Backend(s).")
+}
+
+Rel(User, UserInterface, "Interacts with Simulation Modelling Platform using")
+Rel_R(UserInterface, ScriptingEngine, "Provides Script Input Files", "Model List, Test Script")
+Rel_D(UserInterface, ModelPlatform, "Controls Model Platform using", "Start, Pause, Stop")
+Rel_D(ScriptingEngine, ModelPlatform, "Controls Model Platform using", "Model List,\nGet, Set, etc...")
+Rel_D(ModelPlatform, UserInterface, "Displays simulation data using", "Status, Events")
+'Rel_D(ModelPlatform, ModelManager, "Controls all models using")
+
+'Rel_R(Interface, SMP, "Instantiates", "Model List, Test Script")
+'Rel_R(Interface, SMP, "Calls", "Start, Pause, Stop")
+'Rel_R(SMP, ScriptingEngine, "Instantiates", "Model List, Test Script")
+'Rel_R(ScriptingEngine, SMP, "Calls", "Model Platform")
+@enduml
