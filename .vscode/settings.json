@@ -1,0 +1,11 @@
+{
+  "cSpell.language": "en-GB",
+  "cSpell.enableFiletypes": ["plantuml"],
+  "plantuml.diagramsRoot": "docs/PlantUML/diagrams/src",
+  "plantuml.exportOutDir": "docs/PlantUML/diagrams/out",
+  "plantuml.includepaths": [
+    "docs/PlantUML/diagrams/style",
+    "docs/PlantUML/diagrams/src"
+  ],
+  "cSpell.words": ["plantuml"]
+}
