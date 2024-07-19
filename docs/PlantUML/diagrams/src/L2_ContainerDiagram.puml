@@ -1,26 +1,27 @@
-@startuml SMP Container Diagram
+@startuml L2_Container Diagram - Simulation Model Platform
 
 !theme C4_united from <C4/themes>
 !include <C4/C4_Container>
 
 Person(User,"User", "An Engineer Simulating Models.")
 
-System_Boundary(SMP, "Simulation Modelling Platform") {
-    Container(UserInterface, "User Interface", "CLI, API, GUI", "Handles User Interactions with **Model Platform** and **Scripting Engine**. Optionally, allows user to configure and edit input files and **Model Platform** options.", )
-    Container(ScriptingEngine,"Scripting Engine", "<?> LUA, TCL <?>", "Parses input files used to drive **Model Platform Manager**. Checks validity of input files.\n\nModel List: Defines source and backend type of all models.\n\nTest Script: Uses custom commands to control simulation e.g. wait, set, check")
-    Container(ModelPlatform, "Model Platform", "C#", "Manages collection of Models. Manages consolidated Model Interfaces.")
-    'Container(ModelManager, "Model Manager", "", "Interface between Model Platform and Model Backends. Instantiates and manages interactions with all Model Backend(s).")
+System_Boundary(SimulationModelPlatform, "Simulation Model Platform") {
+    Container(UserInterface, "User Interface", "CLI, GUI, Web App", "Handles **User** interactions with **Model Platform** and **Scripting Engine**. Optionally, allows user to configure and edit input files.")
+    Container(SimulationManager, "Simulation Manager", "C#", "Manages all **Simulations** on the System. Handles **User** requests that control **Simulations**. Monitors status of **Simulations**.")
+    Container(ScriptingEngine,"Simulation Script Engine", "<?>", "Parses **User** input scripts:\n**Model List** parsed to command loading of **Model Backends**.\n**Simulation Script** parsed to command **Model Manager** to run **Simulation**.")
+    Container(ModelManager, "Model Manager", "C#", "Manages **Model Collection**. Manages consolidated **Model Collection** interfaces. Interfaces with each **Model Backend** in **Model Collection**.")
 }
 
-Rel(User, UserInterface, "Interacts with Simulation Modelling Platform using")
-Rel_R(UserInterface, ScriptingEngine, "Provides Script Input Files", "Model List, Test Script")
-Rel_D(UserInterface, ModelPlatform, "Controls Model Platform using", "Start, Pause, Stop")
-Rel_D(ScriptingEngine, ModelPlatform, "Controls Model Platform using", "Model List,\nGet, Set, etc...")
-Rel_D(ModelPlatform, UserInterface, "Displays simulation data using", "Status, Events")
-'Rel_D(ModelPlatform, ModelManager, "Controls all models using")
+System_Boundary(Models, "Model Architecture Compliant Models") {
+    Container(Model, "Model", "Supported Backend", "Compliant **Model** wrapped in a specific **Model Backend**.")
+}
 
-'Rel_R(Interface, SMP, "Instantiates", "Model List, Test Script")
-'Rel_R(Interface, SMP, "Calls", "Start, Pause, Stop")
-'Rel_R(SMP, ScriptingEngine, "Instantiates", "Model List, Test Script")
-'Rel_R(ScriptingEngine, SMP, "Calls", "Model Platform")
+Rel_D(User, UserInterface, "Uses")
+Rel(UserInterface, SimulationManager, "Uses API", "Input Files, User Controls")
+Rel(SimulationManager, ScriptingEngine, "Initialises", "Model List,\nSimulation Script")
+Rel(SimulationManager, ScriptingEngine, "Sends User\nrequests to", "Start, Pause, Stop")
+Rel(ScriptingEngine, SimulationManager, "Reports status to", "Rep No., Test Script Status, etc.")
+Rel(ScriptingEngine, ModelManager, "Controls", "Wait, Get, Set")
+Rel_D(ModelManager, Model, "Runs", "Init, ReInit, Step, Term")
+
 @enduml
