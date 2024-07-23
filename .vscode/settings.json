@@ -1,11 +1,19 @@
 {
-  "cSpell.language": "en-GB",
-  "cSpell.enableFiletypes": ["plantuml"],
+  "editor.formatOnSave": true,
+  "[csharp]": {
+    "editor.defaultFormatter": "csharpier.csharpier-vscode"
+  },
+  "[plantuml]": {
+    "editor.defaultFormatter": "jebbs.plantuml"
+  },
+  "plantuml.exportSubFolder": false,
   "plantuml.diagramsRoot": "docs/PlantUML/diagrams/src",
   "plantuml.exportOutDir": "docs/PlantUML/diagrams/out",
   "plantuml.includepaths": [
     "docs/PlantUML/diagrams/style",
     "docs/PlantUML/diagrams/src"
   ],
+  "cSpell.language": "en-GB",
+  "cSpell.enableFiletypes": ["plantuml"],
   "cSpell.words": ["plantuml"]
 }
