@@ -7,19 +7,17 @@ Person(User,"User", "An Engineer Simulating Models.")
 
 System_Boundary(SimulationModelPlatform, "Simulation Model Platform") {
     Container_Boundary(UserInterface, "User Interface") {
-        Component(CLIApp, "CLI Application", "C#", "TODO. Simple. Focus for Proof of Concept")
-        Component(GUIApp, "GUI Application", "WinForms | WPF", "TODO. Has extended feature set.")
-        Component(WebApp, "component", "description", "TODO. Has extended feature set.")
+        Component(CLIApp, "CLI Application", "C#", "Allows user to interaction with **Simulation Manager**. Focus for Proof of Concept")
+        Component(WebApp, "Web Application", "C#, Blazor, ASP.NET Core", "Allows user to interact with **Simulation Manager**. Has extended feature set: Selecting models individually, loading simulation scripts, custom options, live simulation status.")
+        Component(GUIApp, "Desktop Application", "WinForms | WPF | Avalonia", "Allows user to interaction with **Simulation Manager**. Has same feature set as **Web Application**. Likely harder to build than the **Web Application**.")
     }
     Container(SimulationManager, "Simulation Manager", "C#", "Manages all **Simulations** on the System. Handles **User** requests that control **Simulations**. Monitors status of **Simulations**.")
 }
 
-' TODO: More details on specific types of User Interactions.
 Rel_D(User, CLIApp, "Calls with arguments", "SMP.exe <Model List> <Simulation Script> <Options>")
-Rel_D(User, GUIApp, "Opens and interacts with", "...TODO...")
-Rel_D(User, WebApp, "Opens and interacts with", "...TODO...")
+Rel_D(User, WebApp, "Interacts with", "")
+Rel_D(User, GUIApp, "Interacts with", "")
 
-' TODO: More details on specific common API calls into Simulation Manager.
 Rel_D(CLIApp, SimulationManager, "Uses API", "Input Files, Options")
 Rel_D(GUIApp, SimulationManager, "Uses API", "Input Files, Options, User Controls")
 Rel_D(WebApp, SimulationManager, "Uses API", "Input Files, Options, User Controls")
