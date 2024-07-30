@@ -18,7 +18,6 @@ Rel_D(User, CLIApp, "Calls with arguments", "SMP.exe <Model List> <Simulation Sc
 Rel_D(User, WebApp, "Interacts with", "")
 Rel_D(User, GUIApp, "Interacts with", "")
 
-' TODO: More details on specific common API calls into Simulation Manager.
 Rel_D(CLIApp, SimulationManager, "Uses API", "Input Files, Options")
 Rel_D(GUIApp, SimulationManager, "Uses API", "Input Files, Options, User Controls")
 Rel_D(WebApp, SimulationManager, "Uses API", "Input Files, Options, User Controls")
