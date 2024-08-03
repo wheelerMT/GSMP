@@ -2,7 +2,7 @@
 !theme C4_united from <C4/themes>
 !include <C4/C4_Component>
 
-Container_Boundary(UserInterface, "User Interface") {
+Container_Boundary(SimulationScriptEngine, "Simulation Script Engine") {
         Component(ModelListParser, "Model List Parser", "C#", "Reads model list and passes to **Model Manager** for loading the models.")
         Component(SimulationScriptParser, "Simulation Script Parser", "C#", "Reads user-defined inputs for the model.")
         Component(ModelCommandGenerator, "Model Command Generator", "C#", "Defines the functions to inject the user-defined inputs to a model.")
