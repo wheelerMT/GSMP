@@ -1,0 +1,7 @@
+@startuml
+!theme C4_united from <C4/themes>
+!include <C4/C4_Component>
+
+System_Boundary(SimulationScriptEngine, "Simulation Script Engine") {
+}
+@enduml
