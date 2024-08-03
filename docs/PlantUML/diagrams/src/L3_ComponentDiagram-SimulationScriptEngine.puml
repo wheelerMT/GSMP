@@ -2,6 +2,16 @@
 !theme C4_united from <C4/themes>
 !include <C4/C4_Component>
 
-System_Boundary(SimulationScriptEngine, "Simulation Script Engine") {
-}
+Container_Boundary(UserInterface, "User Interface") {
+        Component(ModelListParser, "Model List Parser", "C#", "Reads model list and passes to **Model Manager** for loading the models.")
+        Component(SimulationScriptParser, "Simulation Script Parser", "C#", "Reads user-defined inputs for the model.")
+        Component(ModelCommandGenerator, "Model Command Generator", "C#", "Defines the functions to inject the user-defined inputs to a model.")
+    }
+
+Container(SimulationManager, "Simulation Manager", "C#", "Manages all **Simulations** on the System. Handles **User** requests that control **Simulations**. Monitors status of **Simulations**.")
+
+Rel_D(SimulationManager, ModelListParser, "Delivers list of models", "")
+Rel_D(ModelListParser, SimulationManager, "Returns result of loading models", "")
+Rel_D(SimulationScriptParser, ModelCommandGenerator, "Parsed Data", "Model, Command, Data, Data Type")
+
 @enduml
