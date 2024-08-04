@@ -1,0 +1,29 @@
+@startuml L3_Component Diagram - Model
+
+!theme C4_united from <C4/themes>
+!include <C4/C4_Component>
+
+System_Boundary(SimulationModelPlatform, "Simulation Model Platform") {
+    Container(ModelManager, "Model Manager", "C#", "Manages **Model Collection**. Manages consolidated **Model Collection** interfaces. Interfaces with each **Model Backend** in **Model Collection**.")
+}
+
+System_Boundary(Models, "Model Architecture Compliant Models") {
+    Container_Boundary(ModelGeneric, "Model (Generic)"){
+        Component(ModelBackendManager, "Model Backend Manager", "C#, Common", "Implements the architecturally compliant **Virtual Model Backend Interface**. Utilities to manage **Model Backend**: Register and manage interfaces. Monitor status. Error Handling.")
+        Component(ModelBackendInterop, "Model Backend Interoperability", "C# to Target Backend, Common", "Implements interoperability between **Model Backend** and Target Backend **Model Wrapper**")
+        Component(ModelWrapper, "Model Wrapper", "Target Backend, Bespoke", "Interface between generic **Model Backend Interface**, and the specific **Model Backend** or **Model** to allow it to be architecturally consistent.")
+        Component(ModelSource, "Model", "Target Backend, Bespoke", "")
+    }
+}
+
+Rel_D(ModelManager, ModelBackendManager, "Setup", "Instantiate, Register")
+Rel_D(ModelManager, ModelBackendManager, "Runs", "Init, ReInit, Step, Term")
+Rel_D(ModelBackendManager, ModelManager, "Reports", "Status, Warnings, Errors")
+
+Rel_R(ModelBackendManager, ModelBackendInterop, "Interfaces", "<All>")
+
+Rel_D(ModelBackendInterop, ModelWrapper, "Interoperability Interfaces", "Register, Init, ReInit, Step, Term")
+
+Rel_L(ModelWrapper, ModelSource, "Interfaces", "Specific to Target Backend") 
+
+@enduml
