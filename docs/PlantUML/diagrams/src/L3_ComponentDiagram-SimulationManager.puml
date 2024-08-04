@@ -1,0 +1,31 @@
+@startuml L3_Component Diagram - Simulation Manager
+
+!theme C4_united from <C4/themes>
+!include <C4/C4_Component>
+
+' Interfacing Containers
+Container(UserInterface, "User Interface", "CLI, GUI, Web Application", "Handles User Interactions with **SMP**.")
+Container(ScriptingEngine, "Simulation Script Engine", "<?>", "Parses **User** input scripts:\n**Model List** parsed to command loading of **Model Backends**.\n**Simulation Script** parsed to command **Model Manager** to run **Simulation**.")
+
+' Container to detail components for:
+Container_Boundary(SimulationManager, "Simulation Manager") {
+    ' <BM: I do not see point of this extra layer> Component(StudyManager, "Study Manager","","Manages collection of all **Studies**. A **Study** shares a common Model List and ")
+    Component(ExperimentManager, "Experiment Manager", "C#", "Manages collection of all **Experiments**. An **Experiment** shares a common **Model List** and **Simulation Script**.")
+    Component(ReplicationManager, "Replication Manager", "C#", "Manages collection of all **Replications** of an **Experiment**. A specific **Replication** of an **Experiment** has a unique seed. Scripts can contain seed specific behaviour.")
+    Component(ResourceManager, "Resource Manager","C#", "Monitor available resources. Monitor status of Replications.")
+}
+
+' External Container Relationships (User Interface)
+Rel_D(UserInterface, ExperimentManager, "Sends Input Data","Model List,\nSimulation Script")
+' FUTURE FEATURE: Rel_D(UserInterface, ExperimentManager, "Sends User Commands","Start, Pause, Stop")
+
+' Internal Simulation Manager Relationships
+Rel_D(ExperimentManager, ReplicationManager, "Passes Input Data","Model List,\nSimulation Script")
+Rel_R(ReplicationManager, ResourceManager, "Checks availability of System Resources")
+
+' External Container Relationships (Scripting Engine)
+Rel_D(ReplicationManager, ScriptingEngine, "Creates Instances of", "Separate Process")
+Rel_D(ReplicationManager, ScriptingEngine, "Sends Input Data","Model List,\nSimulation Script")
+Rel_D(ScriptingEngine, ReplicationManager, "Reports Status to", "Inter-process")
+
+@enduml
