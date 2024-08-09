@@ -1,0 +1,129 @@
+@startuml Sequence Diagram - Run Simulation
+
+' Reference: https://plantuml.com/sequence-diagram
+
+' TODO: Add Lifeline Activation and Destruction to Diagram.
+' TODO: Review 'Critical' content. Remove bloat that delays explanation.
+
+!pragma teoz true
+
+' Entities
+actor User
+
+box "User Interface" #LightYellow
+participant UserInterface[
+    **User Interface**
+    ----
+    CLI
+]
+endBox
+
+box "Simulation Management" #LightBlue
+participant CaseManager[
+    **Case Manager**
+]
+' NOTE: Excluded to reduce complexity.
+'participant ResourceManager[
+'    **Resource Manager**
+']
+participant SimulationManager[
+    **Simulation Manager**
+]
+endBox
+
+box "Simulation Instance" #LightGray
+participant ScriptingEngine[
+    **Scripting Engine**
+]
+participant ModelManager[
+    **Model Manager**
+]
+
+box "Model" #LightSlateGray
+participant ModelBackend[
+    **Model Backend**
+]
+' NOTE: Excluded to reduce complexity.
+'participant ModelBackendInteroperability[
+'    **Simulation Manager**
+']
+'NOTE: Excluded to reduce complexity.
+'participant ModelWrapper[
+'    **ModelWrapper**
+']
+participant Model[
+    **Model**
+]
+endBox
+endBox
+'
+' User runs a Test Case/Scenario
+'
+User -> UserInterface: **Calls**\n{Model List(s), Script(s)}
+group For each Case
+    UserInterface -> CaseManager: **Create Case**\n{Model List, Script}
+    'CaseManager -> ResourceManager: **Request Resource**\ne.g.Processor, Memory
+    'ResourceManager -> ResourceManager: Wait for Resource
+    'CaseManager <- ResourceManager: **Assign Resource**
+    CaseManager -> SimulationManager: **Create Simulation**\n{Model List}
+    & SimulationManager -> ScriptingEngine: **Create Simulation Process**
+    ScriptingEngine -> ScriptingEngine: **Parse** {Model List}
+    activate ScriptingEngine
+    '
+    ' Setup Models
+    '
+    group For each Model
+        ScriptingEngine -> ModelManager: **Create Model**
+        ModelManager -> ModelBackend: **Instantiate Model**\nC# Interface
+        & ModelBackend -> Model: **Instantiate Model**\nC# to Target Backend Interoperability
+            group For each Interface Variable
+            Model -> ModelBackend: **Register Interface**\n{Name, Description, Type, Size, etc.}
+            end
+        ModelManager -> ModelBackend: **Get Interfaces**
+    end
+    deactivate ScriptingEngine
+    '
+    ' Consolidate Model Interfaces
+    '
+    ModelManager -> ModelManager: **Interface Management**
+    note right
+        **Error:** Duplicated outputs for multiple models.
+        **Warning:** Inputs do not have common default values.
+        **Warning:** Expected Output unavailable for Input.
+    end note
+
+    '
+    ' Initialise Model (Default State, defined by Model)
+    '
+    group For each Model
+        ModelManager -> ModelBackend: **Init()**\nDefault Model Initialisation
+        ModelBackend -> Model: **Init()**\nC# to Target Backend Interoperability
+    end
+    ScriptingEngine <- ModelManager:
+    & SimulationManager <- ScriptingEngine: **Report Status**\nWaiting for Script
+
+    group For each Replication (in Case)
+        CaseManager -> SimulationManager: **Request Replication**
+        SimulationManager -> ScriptingEngine: **Request Replication**\n{Script}
+        ScriptingEngine -> ScriptingEngine: **Parse** {Script}
+        activate ScriptingEngine
+        ScriptingEngine -> ModelManager: **Script.Check** {Variable, Value | Variable}
+        activate ModelManager
+        ModelManager -> ModelBackend: **Get** {Variable}
+        ScriptingEngine -> ModelManager: **Script.Set** {Variable, Value | Variable}
+        ModelManager -> ModelBackend: **Set** {Variable}
+        ScriptingEngine -> ModelManager: **Script.Wait** {SimulationTime}
+        loop Until Simulation Time
+        ModelManager -> ModelBackend: **Step** {SimulationTime}
+        ModelManager <- ModelBackend: **Update Outputs**
+        ModelManager -> ModelManager: **Outputs to Inputs**
+        end
+        ScriptingEngine <- ModelManager: **End Condition**\nScript, Error, Sub-Model
+        deactivate ModelManager
+        & SimulationManager <- ScriptingEngine: **Report Status**\nReplication Completed 
+        deactivate ScriptingEngine
+        &SimulationManager -> CaseManager: **Replication Complete**
+    end
+end
+
+@enduml
