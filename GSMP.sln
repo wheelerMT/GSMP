@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSMP.CLI", "src\GSMP.CLI\GSMP.CLI.csproj", "{ACB155B2-FC5C-4EBF-9833-E56F893D4792}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSMP.ModelManager", "src\GSMP.ModelManager\GSMP.ModelManager.csproj", "{7D49A14A-6570-47A8-9B6F-55389E856943}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{ACB155B2-FC5C-4EBF-9833-E56F893D4792}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACB155B2-FC5C-4EBF-9833-E56F893D4792}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACB155B2-FC5C-4EBF-9833-E56F893D4792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D49A14A-6570-47A8-9B6F-55389E856943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D49A14A-6570-47A8-9B6F-55389E856943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D49A14A-6570-47A8-9B6F-55389E856943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D49A14A-6570-47A8-9B6F-55389E856943}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
