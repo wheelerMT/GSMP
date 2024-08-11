@@ -3,20 +3,24 @@
 
 ' Class definitions
 class ModelManagerVariable {
-ModelVariable variable
+ModelVariable Variable
 List<ModelBackend> AssociatedBackends
 }
 
-abstract class ModelVariable {
+class ModelVariable<T> {
 String Name
-VariableType type
-VariableIntent intent
-<T> DefaultValue
-List<int> Dimensions
 String Description
+Type Type
+VariableIntent Intent
+T DefaultValue
+List<int> Dimensions
 }
 
 ' Notes
+note right of ModelVariable::Type
+  This is inferred from T
+end note
+
 note right of ModelVariable::DefaultValue
   This needs to be defined with generics
   to ensure it works with all types.
@@ -32,14 +36,8 @@ note left of ModelVariable::Dimensions
 end note
 
 ' Enum definitions
-enum VariableType {
-Integer
-Double
-Single
-...
-}
-
 enum VariableIntent {
+Undefined
 Input
 Output
 Override
@@ -47,7 +45,6 @@ Override
 
 ' Relationships
 ModelManagerVariable *-- ModelVariable
-ModelVariable *-- VariableType
 ModelVariable *-- VariableIntent
 
 @enduml
