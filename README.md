@@ -17,21 +17,10 @@ whilst being able to link an arbitrary number of models together.
 Simulation Scripting Engine, giving users the ability to change
 parameters of any model, and even inject faults.
 
-
 ## High-level architecture
-This project makes use of the [C4 Model](https://c4model.com/) to architect
-the system diagrams (see [README.md](docs/readme.md) in `docs/` for more information).
-
-The level 1 (context) diagram is given below.
-<p align="center">
-  <img src="docs/PlantUML/diagrams/out/L1_System Context Diagram - Simulation Model Platform.png "/>
-</p>
-
-Zooming into the Simulation Model Platform gives us the level 2 (container)
-diagram, given below.
-<p align="center">
-  <img src="docs/PlantUML/diagrams/out/L2_Container Diagram - Simulation Model Platform.png "/>
-</p>
+This project makes use of the [C4 Model](https://c4model.com/) to design
+the system diagrams.
+For a detailed overview of the system architecture, see [README.md](docs/PlantUML/README.md) in `docs/`.
 
 ## Work for the proof-of-concept
 For the proof-of-concept, the bulk of work is in building the Model Manager,
@@ -40,3 +29,7 @@ We should be able to prove with (at least) two models, built in different
 backends, that interface checking and consolidation is possible.
 Once this is proven, we can add on additional functionality, i.e., the
 Simulation Manager and potentially the Simulation Scripting Engine.
+
+## Contributing
+All contributions to the GSMP are welcome. See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for details on how to get
+up and running with the project, including best practices and an installation guide.
