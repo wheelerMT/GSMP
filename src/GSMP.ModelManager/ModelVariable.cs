@@ -10,6 +10,7 @@ public record ModelVariable<T> where T : new()
     public List<int> Dimensions { get; init; } = [];
 }
 
+
 public enum VariableIntent
 {
     Undefined,
