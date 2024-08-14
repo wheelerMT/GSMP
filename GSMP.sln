@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSMP.CLI", "src\GSMP.CLI\GS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSMP.ModelManager", "src\GSMP.ModelManager\GSMP.ModelManager.csproj", "{7D49A14A-6570-47A8-9B6F-55389E856943}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{32D276E7-9D05-4EE0-8AB5-4454BC578ED4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{7D49A14A-6570-47A8-9B6F-55389E856943}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D49A14A-6570-47A8-9B6F-55389E856943}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D49A14A-6570-47A8-9B6F-55389E856943}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ACB155B2-FC5C-4EBF-9833-E56F893D4792} = {32D276E7-9D05-4EE0-8AB5-4454BC578ED4}
+		{7D49A14A-6570-47A8-9B6F-55389E856943} = {32D276E7-9D05-4EE0-8AB5-4454BC578ED4}
 	EndGlobalSection
 EndGlobal
