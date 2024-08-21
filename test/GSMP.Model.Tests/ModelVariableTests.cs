@@ -1,4 +1,4 @@
-namespace GSMP.ModelManager.Tests;
+namespace GSMP.Model.Tests;
 
 [TestFixture]
 public class ModelVariableTests
