@@ -1,11 +1,14 @@
 ﻿namespace GSMP.Model;
+
 public interface IModel
 {
+    List<IModelVariable> Variables { get; }
 
     // Model Setup Calls
 
     public void LoadModel();
-    public List<IModelVariable> GetVariables();
+    public IModelVariable GetVariableFromModel(string variableName);
+
     public void AddVariable(IModelVariable variable);
 
     // Model Runtime Calls
