@@ -1,46 +1,39 @@
 ﻿namespace GSMP.Model;
 
-public class Model
+public abstract class Model : IModel
 {
-    // List of ModelVariables [Empty]
-    // Model Specific Properties or Options
-    // Logging Options
+    // List of all ModelVariables
+    public List<IModelVariable> Variables { get; } = [];
 
+    //
+    // Model Backend Setup
+    //
 
-    // Model Backend Setup (IModelSetup?)
+    // Logic to load a specific Model Backend
+    public abstract void LoadModel();
 
-    public virtual List<IModelVariable> GetVariableInformation()
+    // Get the metadata about a specific variable, then construct it into a ModelVariable
+    public abstract IModelVariable GetVariableFromModel(string variableName);
+
+    // Adds a ModelVariable to the Variable list
+    public virtual void AddVariable(IModelVariable variable)
     {
-        // Implementation to get all Model Variable Information
-        return [];
+        Variables.Add(variable);
     }
 
-    public virtual void RegisterVariableInformation()
-    {
-        // ARGS: string name, VariableIntent intent, T defaultValue, string description = ""
-        // New Variable (ARGS) : Validity
-        // Add to List in Model (C#) : Validity - does not exist, is not contradictory
-    }
+    //
+    // Model Runtime
+    //
 
-    // Model Runtime (IModelRuntime?)
+    // Implementation for initialization
+    public abstract void Initialize();
 
-    public virtual void Initialize()
-    {
-        // Implementation for initialization
-    }
+    // Implementation for reinitialization
+    public abstract void Reinitialize();
 
-    public virtual void Reinitialize()
-    {
-        // Implementation for reinitialization
-    }
+    // Implementation for a step in the model
+    public abstract void Step();
 
-    public virtual void Step()
-    {
-        // Implementation for a step in the model
-    }
-
-    public virtual void Terminate()
-    {
-        // Implementation for termination
-    }
+    // Implementation for termination
+    public abstract void Terminate();
 }
