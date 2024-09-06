@@ -1,4 +1,5 @@
 ﻿namespace GSMP.Model;
+
 public class Model
 {
     // List of ModelVariables [Empty]
@@ -11,8 +12,9 @@ public class Model
     public virtual List<IModelVariable> GetVariableInformation()
     {
         // Implementation to get all Model Variable Information
-        return new List<IModelVariable>();
+        return [];
     }
+
     public virtual void RegisterVariableInformation()
     {
         // ARGS: string name, VariableIntent intent, T defaultValue, string description = ""
