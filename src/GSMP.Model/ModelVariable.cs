@@ -8,6 +8,13 @@ public class ModelVariable<T> : IModelVariable<T>
     public VariableIntent Intent { get; }
     public T DefaultValue { get; }
     public T CurrentValue { get; set; }
+
+    object IModelVariable.CurrentValue
+    {
+        get => CurrentValue ?? throw new InvalidOperationException("Current value is null");
+        set => CurrentValue = (T)value;
+    }
+
     public Type Type { get; }
     public string Description { get; }
     public IReadOnlyList<int>? Dimensions { get; }
