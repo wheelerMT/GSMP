@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a C# model within the GSMP framework, inheriting from the Model class.
 /// </summary>
-public class CSharpModel : Model
+public sealed class CSharpModel : Model
 {
     /// <summary>
     /// Represents the current simulation time in the model.
@@ -22,7 +22,7 @@ public class CSharpModel : Model
     /// </summary>
     public CSharpModel()
     {
-        GenerateInputsOutputs();
+        Initialize();
     }
 
     /// <summary>
