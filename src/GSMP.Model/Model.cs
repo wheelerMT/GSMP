@@ -3,7 +3,7 @@
 public abstract class Model : IModel
 {
     // List of all ModelVariables
-    public List<IModelVariable> Variables { get; } = [];
+    public List<IModelVariable> Variables { get; protected set; } = [];
 
 /* ┌────────────────────────────────────────────────────────────────┐ */
 /* │                      Model Backend Setup                       │ */
