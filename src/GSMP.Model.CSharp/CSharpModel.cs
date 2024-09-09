@@ -2,7 +2,10 @@
 
 public class CSharpModel : Model
 {
-    public override void LoadModel() => GenerateInputsOutputs();
+    private CSharpModel()
+    {
+        GenerateInputsOutputs();
+    }
 
     public override IModelVariable GetVariableFromModel(string variableName)
     {
