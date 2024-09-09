@@ -9,9 +9,6 @@ public abstract class Model : IModel
 /* │                      Model Backend Setup                       │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-    // Logic to load a specific Model Backend
-    public abstract void LoadModel();
-
     // Get the metadata about a specific variable, then construct it into a ModelVariable
     public abstract IModelVariable GetVariableFromModel(string variableName);
 

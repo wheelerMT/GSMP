@@ -8,8 +8,6 @@ public interface IModel
 /* │                      Model Setup Calls                         │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-    public void LoadModel();
-
     public IModelVariable GetVariableFromModel(string variableName);
 
     public void AddVariable(IModelVariable variable);
