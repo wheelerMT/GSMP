@@ -17,7 +17,7 @@ public class CSharpModel : Model
 
     public override void Reinitialize() => GenerateInputsOutputs();
 
-    public override void Step() => throw new NotImplementedException();
+    public override void Step() => AddRandomIncrement();
 
     public override void Terminate() => throw new NotImplementedException();
 
@@ -35,5 +35,20 @@ public class CSharpModel : Model
 
         // Add inputs/outputs to Variables list
         AddVariableRange([iInt, iFloat, iDouble, oInt, oFloat, oDouble]);
+    }
+
+    private void AddRandomIncrement()
+    {
+        foreach (var variable in Variables)
+        {
+            double randomValue = new Random().NextDouble() * 10;
+            variable.CurrentValue = variable.CurrentValue switch
+            {
+                int intValue => (intValue + (int)randomValue),
+                float floatValue => (floatValue + (float)randomValue),
+                double doubleValue => (doubleValue + randomValue),
+                _ => variable.CurrentValue
+            };
+        }
     }
 }
