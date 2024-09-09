@@ -60,9 +60,6 @@ public class ModelVariable<T> : IModelVariable<T>
 
     public override string ToString() =>
         $"{Name} ({Intent}): {CurrentValue} (Default: {DefaultValue})";
-
-    public object GetValue() => throw new NotImplementedException();
-    public void SetValue(object value) => throw new NotImplementedException();
 }
 
 public enum VariableIntent
