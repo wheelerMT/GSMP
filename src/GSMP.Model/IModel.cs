@@ -4,9 +4,9 @@ public interface IModel
 {
     List<IModelVariable> Variables { get; }
 
-/* ┌────────────────────────────────────────────────────────────────┐ */
-/* │                      Model Setup Calls                         │ */
-/* └────────────────────────────────────────────────────────────────┘ */
+    /* ┌────────────────────────────────────────────────────────────────┐ */
+    /* │                      Model Setup Calls                         │ */
+    /* └────────────────────────────────────────────────────────────────┘ */
 
     public IModelVariable GetVariableFromModel(string variableName);
 
@@ -17,9 +17,9 @@ public interface IModel
     public void AddVariableRange(List<IModelVariable> variables);
 
 
-/* ┌────────────────────────────────────────────────────────────────┐ */
-/* │                      Model Runtime Calls                       │ */
-/* └────────────────────────────────────────────────────────────────┘ */
+    /* ┌────────────────────────────────────────────────────────────────┐ */
+    /* │                      Model Runtime Calls                       │ */
+    /* └────────────────────────────────────────────────────────────────┘ */
 
     public void Initialize();
     public void Reinitialize();

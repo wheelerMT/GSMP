@@ -5,9 +5,9 @@ public abstract class Model : IModel
     // List of all ModelVariables
     public List<IModelVariable> Variables { get; protected set; } = [];
 
-/* ┌────────────────────────────────────────────────────────────────┐ */
-/* │                      Model Backend Setup                       │ */
-/* └────────────────────────────────────────────────────────────────┘ */
+    /* ┌────────────────────────────────────────────────────────────────┐ */
+    /* │                      Model Backend Setup                       │ */
+    /* └────────────────────────────────────────────────────────────────┘ */
 
     // Get the metadata about a specific variable, then construct it into a ModelVariable
     public abstract IModelVariable GetVariableFromModel(string variableName);
@@ -24,9 +24,9 @@ public abstract class Model : IModel
         Variables.AddRange(variables);
     }
 
-/* ┌────────────────────────────────────────────────────────────────┐ */
-/* │                      Model Runtime                             │ */
-/* └────────────────────────────────────────────────────────────────┘ */
+    /* ┌────────────────────────────────────────────────────────────────┐ */
+    /* │                      Model Runtime                             │ */
+    /* └────────────────────────────────────────────────────────────────┘ */
 
     // Implementation for initialization
     public abstract void Initialize();
