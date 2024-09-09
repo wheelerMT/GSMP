@@ -5,9 +5,9 @@ public abstract class Model : IModel
     // List of all ModelVariables
     public List<IModelVariable> Variables { get; } = [];
 
-    //
-    // Model Backend Setup
-    //
+/* ┌────────────────────────────────────────────────────────────────┐ */
+/* │                      Model Backend Setup                       │ */
+/* └────────────────────────────────────────────────────────────────┘ */
 
     // Logic to load a specific Model Backend
     public abstract void LoadModel();
@@ -21,9 +21,9 @@ public abstract class Model : IModel
         Variables.Add(variable);
     }
 
-    //
-    // Model Runtime
-    //
+/* ┌────────────────────────────────────────────────────────────────┐ */
+/* │                      Model Runtime                             │ */
+/* └────────────────────────────────────────────────────────────────┘ */
 
     // Implementation for initialization
     public abstract void Initialize();
