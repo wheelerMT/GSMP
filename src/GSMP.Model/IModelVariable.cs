@@ -9,13 +9,12 @@ public interface IModelVariable
     string Description { get; }
     IReadOnlyList<int>? Dimensions { get; }
     void ResetToDefault();
-    object GetValue(); // TODO Current/Default
-    void SetValue(object value); // TODO Current/Default
+    object CurrentValue { get; set; }
 }
 
 // Generic IModelVariable<T> interface
 public interface IModelVariable<T> : IModelVariable
 {
     T DefaultValue { get; }
-    T CurrentValue { get; set; }
+    new T CurrentValue { get; set; }
 }
