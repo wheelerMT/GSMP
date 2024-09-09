@@ -1,27 +1,27 @@
-@startuml L2_Container Diagram - Simulation Model Platform
+@startuml L2_Container Diagram - Generic Simulation & Modelling Platform
 
 !theme C4_united from <C4/themes>
 !include <C4/C4_Container>
 
-Person(User,"User", "An Engineer Simulating Models.")
+Person(User,"User", "An Engineer simulating **Scenarios** on a collection of **Models**")
 
-System_Boundary(SimulationModelPlatform, "Simulation Model Platform") {
-    Container(UserInterface, "User Interface", "CLI, GUI, Web App", "Handles **User** interactions with **Model Platform** and **Scripting Engine**. Optionally, allows user to configure and edit input files.")
+System_Boundary(SimulationModelPlatform, "Generic Simulation & Modelling Platform") {
+    Container(UserInterface, "User Interface", "CLI, GUI, Web App", "Handles **User** interactions with **Simulations**. Optionally, allows user to configure and edit **Scripts**.")
     Container(SimulationManager, "Simulation Manager", "C#", "Manages all **Simulations** on the System. Handles **User** requests that control **Simulations**. Monitors status of **Simulations**.")
-    Container(ScriptingEngine,"Simulation Script Engine", "<?>", "Parses **User** input scripts:\n**Model List** parsed to command loading of **Model Backends**.\n**Simulation Script** parsed to command **Model Manager** to run **Simulation**.")
-    Container(ModelManager, "Model Manager", "C#", "Manages **Model Collection**. Manages consolidated **Model Collection** interfaces. Interfaces with each **Model Backend** in **Model Collection**.")
+    Container(Simulation,"Simulation", "C#, Script Parsing", "A separate **Simulation** process instantiated by **Simulation Manager**. Parses **User** scripts to: Load a list of **Models**. Command **Model Manager** to run a **Simulation** **Scenario**.")
+    Container(ModelManager, "Model Manager", "C#", "Manages list of **Models**. Manages consolidated variables of managed **Models**. Commands each managed **Model**, and associated interfaces.")
 }
 
 System_Boundary(Models, "Model Architecture Compliant Models") {
-    Container(Model, "Model", "Supported Backend", "Compliant **Model** wrapped in a specific **Model Backend**.")
+    Container(Model, "Model", "C#, Target Backend", "A **Model** that is architecturally consistent. Obscures the **Target Backend**. Shares a common interface for all **Models**, implemented in C#. Registers all **Model** variables.")
 }
 
 Rel_D(User, UserInterface, "Uses")
 Rel(UserInterface, SimulationManager, "Uses API", "Input Files, User Controls")
-Rel(SimulationManager, ScriptingEngine, "Initialises", "Model List,\nSimulation Script")
-Rel(SimulationManager, ScriptingEngine, "Sends User\nrequests to", "Start, Pause, Stop")
-Rel(ScriptingEngine, SimulationManager, "Reports status to", "Rep No., Test Script Status, etc.")
-Rel(ScriptingEngine, ModelManager, "Controls", "Wait, Get, Set")
+Rel(SimulationManager, Simulation, "Initialises", "Model List,\nSimulation Script")
+Rel(SimulationManager, Simulation, "Sends User\nrequests to", "Start, Pause, Stop")
+Rel(Simulation, SimulationManager, "Reports status to", "Rep No., Test Script Status, etc.")
+Rel(Simulation, ModelManager, "Controls", "Wait, Get, Set")
 Rel_D(ModelManager, Model, "Runs", "Init, ReInit, Step, Term")
 
 @enduml

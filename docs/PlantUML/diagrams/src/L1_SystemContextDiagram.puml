@@ -3,14 +3,11 @@
 !theme C4_united from <C4/themes>
 !include <C4/C4_Context>
 
-Person(User,"User", "An Engineer Simulating Models.")
-System(SimulationModelPlatform, "Simulation Model Platform", "Manages **Simulations** of **Model Collections** based on a **User** defined **Simulation Scripts**.","","","","Software System")
-System(Models, "Model Architecture Compliant Models", "**Models** built in various different **Model Backends**.")
-'System(Example1,"Results Server")
-'System(Example2,"Model Database")
-'System(Example3,"Scenario Database")
+Person(User,"User", "An Engineer simulating **Scenarios** on a collection of **Models**")
+System(GenericSimulationModelPlatform, "Generic Simulation\nModel Platform", "Manages **Simulations** of **Model Collections** based on a **User** defined **Scripts**.","","","","Software System")
+System(Models, "Models", "**Models** implementing a consistent **Model Interface** built in various different **Target Backends** (C++, C, etc.).", "", "", "", "Model Architecture Compliant")
 
-Rel(User, SimulationModelPlatform, "Uses")
-Rel(SimulationModelPlatform, Models, "Runs")
+Rel(User, GenericSimulationModelPlatform, "Uses")
+Rel(GenericSimulationModelPlatform, Models, "Runs")
 
 @enduml
