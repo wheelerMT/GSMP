@@ -38,7 +38,7 @@ public class ModelVariable<T> : IModelVariable<T>
             throw new ArgumentException("Invalid VariableIntent value.", nameof(intent));
     }
 
-    private static IReadOnlyList<int>? CalculateDimensions(T value)
+    private static int[]? CalculateDimensions(T value)
     {
         return value switch
         {
@@ -53,6 +53,7 @@ public class ModelVariable<T> : IModelVariable<T>
 
     public override string ToString() =>
         $"{Name} ({Intent}): {CurrentValue} (Default: {DefaultValue})";
+
     public object GetValue() => throw new NotImplementedException();
     public void SetValue(object value) => throw new NotImplementedException();
 }
