@@ -34,6 +34,6 @@ public class CSharpModel : Model
         ModelVariable<double> oDouble = new("oDouble", VariableIntent.Output, 0.0);
 
         // Add inputs/outputs to Variables list
-        Variables.AddRange([iInt, iFloat, iDouble, oInt, oFloat, oDouble]);
+        AddVariableRange([iInt, iFloat, iDouble, oInt, oFloat, oDouble]);
     }
 }

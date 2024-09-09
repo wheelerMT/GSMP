@@ -12,10 +12,16 @@ public abstract class Model : IModel
     // Get the metadata about a specific variable, then construct it into a ModelVariable
     public abstract IModelVariable GetVariableFromModel(string variableName);
 
-    // Adds a ModelVariable to the Variable list
+    // Adds a single ModelVariable to the Variable list
     public virtual void AddVariable(IModelVariable variable)
     {
         Variables.Add(variable);
+    }
+
+    // Adds multiple ModelVariable to the Variable list
+    public virtual void AddVariableRange(List<IModelVariable> variables)
+    {
+        Variables.AddRange(variables);
     }
 
 /* ┌────────────────────────────────────────────────────────────────┐ */
