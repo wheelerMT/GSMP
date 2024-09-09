@@ -21,14 +21,14 @@ public class CSharpModel : Model
     private void GenerateInputsOutputs()
     {
         // Generate new int, float and double inputs
-        ModelVariable<int> iInt = new ModelVariable<int>("iInt", VariableIntent.Input, 1);
-        ModelVariable<float> iFloat = new ModelVariable<float>("iFloat", VariableIntent.Input, 10.0f);
-        ModelVariable<double> iDouble = new ModelVariable<double>("iDouble", VariableIntent.Input, 100.0);
+        ModelVariable<int> iInt = new("iInt", VariableIntent.Input, 1);
+        ModelVariable<float> iFloat = new("iFloat", VariableIntent.Input, 10.0f);
+        ModelVariable<double> iDouble = new("iDouble", VariableIntent.Input, 100.0);
 
         // Generate new int, float and double outputs
-        ModelVariable<int> oInt = new ModelVariable<int>("oInt", VariableIntent.Output, 0);
-        ModelVariable<float> oFloat = new ModelVariable<float>("oFloat", VariableIntent.Output, 0.0f);
-        ModelVariable<double> oDouble = new ModelVariable<double>("oDouble", VariableIntent.Output, 0.0);
+        ModelVariable<int> oInt = new("oInt", VariableIntent.Output, 0);
+        ModelVariable<float> oFloat = new("oFloat", VariableIntent.Output, 0.0f);
+        ModelVariable<double> oDouble = new("oDouble", VariableIntent.Output, 0.0);
 
         // Add inputs/outputs to Variables list
         Variables.AddRange([iInt, iFloat, iDouble, oInt, oFloat, oDouble]);
