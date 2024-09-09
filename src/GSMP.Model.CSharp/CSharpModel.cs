@@ -47,7 +47,11 @@ public sealed class CSharpModel : Model
     /// This method is typically called to reset the model's state to its initial configuration
     /// while preserving the overall structure of the model.
     /// </summary>
-    public override void Reinitialize() => GenerateInputsOutputs();
+    public override void Reinitialize()
+    {
+        Variables = [];
+        GenerateInputsOutputs();
+    }
 
     /// <summary>
     /// Executes the model step, advancing the state of the model by applying a random increment
@@ -98,7 +102,7 @@ public sealed class CSharpModel : Model
             double randomValue = new Random().NextDouble() * 10;
             variable.CurrentValue = variable.CurrentValue switch
             {
-                int intValue => (intValue + (int)randomValue),
+                int intValue => (intValue + (int)randomValue + 1),
                 float floatValue => (floatValue + (float)randomValue),
                 double doubleValue => (doubleValue + randomValue),
                 _ => variable.CurrentValue
