@@ -20,7 +20,7 @@ public class CSharpModel : Model
     /// <summary>
     /// Represents a model in the GSMP framework designed for C#.
     /// </summary>
-    private CSharpModel()
+    public CSharpModel()
     {
         GenerateInputsOutputs();
     }
