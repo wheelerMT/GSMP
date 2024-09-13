@@ -1,5 +1,5 @@
 # Set the headers of the library
-set(HEADER_LIST "include/model.h")
+set(HEADER_LIST "include/model.h" "include/GSMP_model_types.h")
 
 # Make an automatic shared library
 add_library(GSMP_CPP SHARED src/model.cpp ${HEADER_LIST})
