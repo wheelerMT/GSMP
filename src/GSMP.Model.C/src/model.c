@@ -10,8 +10,8 @@
 /* │                           GSMP MODEL                           │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-#include "GSMP_Model.h"
-#include "GSMP_ModelTypes.h"
+#include "GSMP_model.h"
+#include "GSMP_model_types.h"
 
 // TODO: How to reference into this style of structure. For example
 //       to find name 'iInt'. Might have to consider an alternative
