@@ -45,7 +45,7 @@ typedef struct GSMPModel
 
 GSMP_API int GSMP_Model_Create(GSMPModel *model)
 {
-    // TOOD: Create Model Instance (Memory Allocation)
+    // TODO: Create Model Instance (Memory Allocation)
     // TODO: Setup all Model Variable Data (use struct declaration)
 
     return 0;
