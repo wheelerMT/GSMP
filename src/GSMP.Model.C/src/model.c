@@ -16,19 +16,22 @@
 // TODO: How to reference into this style of structure. For example
 //       to find name 'iInt'. Might have to consider an alternative
 //       that's an array.
-typedef struct GSMP_Inputs {
+typedef struct GSMP_Inputs
+{
     GSMP_Variable_t iInt;
     GSMP_Variable_t iFloat;
     GSMP_Variable_t iDouble;
 } GSMPInputs_t;
 
-typedef struct GSMPOutputs {
+typedef struct GSMPOutputs
+{
     GSMP_Variable_t oInt;
     GSMP_Variable_t oFloat;
     GSMP_Variable_t oDouble;
 } GSMPOutputs_t;
 
-typedef struct GSMPModel {
+typedef struct GSMPModel
+{
     double time;
     double timeStep;
 
@@ -40,7 +43,7 @@ typedef struct GSMPModel {
 // Model Instance Management
 /* ────────────────────────────────────────────────────────────────── */
 
-GSMP_API int GSMP_Model_Create(GSMPModel* model)
+GSMP_API int GSMP_Model_Create(GSMPModel *model)
 {
     // TOOD: Create Model Instance (Memory Allocation)
     // TODO: Setup all Model Variable Data (use struct declaration)
@@ -48,7 +51,7 @@ GSMP_API int GSMP_Model_Create(GSMPModel* model)
     return 0;
 }
 
-GSMP_API int GSMP_Model_Destroy(GSMPModel* model)
+GSMP_API int GSMP_Model_Destroy(GSMPModel *model)
 {
     // TODO: Clear Model Variables, as applicable
     // TODO: Clear Model Instance
@@ -60,25 +63,25 @@ GSMP_API int GSMP_Model_Destroy(GSMPModel* model)
 // Model Runtime
 /* ────────────────────────────────────────────────────────────────── */
 
-GSMP_API int GSMP_Model_Initialize(GSMPModel* model)
+GSMP_API int GSMP_Model_Initialize(GSMPModel *model)
 {
     return 0;
 }
 
-GSMP_API int GSMP_Model_Reinitialize(GSMPModel* model)
+GSMP_API int GSMP_Model_Reinitialize(GSMPModel *model)
 {
     // Reset all variables to default value
     return 0;
 }
 
-GSMP_API int GSMP_Model_Step(GSMPModel* model)
+GSMP_API int GSMP_Model_Step(GSMPModel *model)
 {
     // TODO: Increment Internal Time
     // TODO: Update Outputs based on Inputs
     return 0;
 }
 
-GSMP_API int GSMP_Model_Terminate(GSMPModel* model)
+GSMP_API int GSMP_Model_Terminate(GSMPModel *model)
 {
     // Close file streams etc. N/A for ExampleModel
     return 0;
@@ -88,7 +91,7 @@ GSMP_API int GSMP_Model_Terminate(GSMPModel* model)
 // Model Variables
 /* ────────────────────────────────────────────────────────────────── */
 
-GSMP_API int GSMP_Model_GetVariableType(GSMPModel* model, char* name, int* value)
+GSMP_API int GSMP_Model_GetVariableType(GSMPModel *model, char *name, int *value)
 {
     // TODO: How to find the variable/property associated with the 'name'.
     //       (1) Switch on 'name', have specific types of variable struct.
@@ -98,38 +101,38 @@ GSMP_API int GSMP_Model_GetVariableType(GSMPModel* model, char* name, int* value
     return 0;
 }
 
-GSMP_API int GSMP_Model_GetVariableDescription(GSMPModel* model, char* name, int* value)
+GSMP_API int GSMP_Model_GetVariableDescription(GSMPModel *model, char *name, int *value)
 {
     // See GSMP_Model_GetVariableType
     return 0;
 }
 
-GSMP_API int GSMP_Model_SetVariable_Int(GSMPModel* model, char* name, int* value)
+GSMP_API int GSMP_Model_SetVariable_Int(GSMPModel *model, char *name, int *value)
 {
     return 0;
 }
 
-GSMP_API int GSMP_Model_SetVariable_Float(GSMPModel* model, char* name, float* value)
+GSMP_API int GSMP_Model_SetVariable_Float(GSMPModel *model, char *name, float *value)
 {
     return 0;
 }
 
-GSMP_API int GSMP_Model_SetVariable_Double(GSMPModel* model, char* name, double* value)
+GSMP_API int GSMP_Model_SetVariable_Double(GSMPModel *model, char *name, double *value)
 {
     return 0;
 }
 
-GSMP_API int GSMP_Model_GetVariable_Int(GSMPModel* model, char* name, int* value)
+GSMP_API int GSMP_Model_GetVariable_Int(GSMPModel *model, char *name, int *value)
 {
     return 0;
 }
 
-GSMP_API int GSMP_Model_GetVariable_Float(GSMPModel* model, char* name, float* value)
+GSMP_API int GSMP_Model_GetVariable_Float(GSMPModel *model, char *name, float *value)
 {
     return 0;
 }
 
-GSMP_API int GSMP_Model_GetVariable_Double(GSMPModel* model, char* name, double* value)
+GSMP_API int GSMP_Model_GetVariable_Double(GSMPModel *model, char *name, double *value)
 {
     return 0;
 }

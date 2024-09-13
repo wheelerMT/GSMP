@@ -41,35 +41,44 @@
 /* │                           GSMP MODEL                           │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-#include "GSMP_ModelTypes.h"
+#include "GSMP_model_types.h"
 
 // Opaque pointer to GSMP Model Instance
 typedef struct GSMPModel GSMPModel;
 
 // Model Instance Management
-GSMP_API int GSMP_Model_Create(GSMPModel* model);
-GSMP_API int GSMP_Model_Destroy(GSMPModel* model);
+GSMP_API int GSMP_Model_Create(GSMPModel *model);
+
+GSMP_API int GSMP_Model_Destroy(GSMPModel *model);
 
 // Model Runtime
-GSMP_API int GSMP_Model_Initialize(GSMPModel* model);
-GSMP_API int GSMP_Model_Reinitialize(GSMPModel* model);
-GSMP_API int GSMP_Model_Step(GSMPModel* model);
-GSMP_API int GSMP_Model_Terminate(GSMPModel* model);
+GSMP_API int GSMP_Model_Initialize(GSMPModel *model);
+
+GSMP_API int GSMP_Model_Reinitialize(GSMPModel *model);
+
+GSMP_API int GSMP_Model_Step(GSMPModel *model);
+
+GSMP_API int GSMP_Model_Terminate(GSMPModel *model);
 
 // Model Variables
-GSMP_API int GSMP_Model_GetVariableType(GSMPModel* model, char* name, int* value);
-GSMP_API int GSMP_Model_GetVariableDescription(GSMPModel* model, char* name, int* value);
+GSMP_API int GSMP_Model_GetVariableType(GSMPModel *model, char *name, int *value);
 
-GSMP_API int GSMP_Model_SetVariable_Int(GSMPModel* model, char* name, int* value);
-GSMP_API int GSMP_Model_SetVariable_Float(GSMPModel* model, char* name, float* value);
-GSMP_API int GSMP_Model_SetVariable_Double(GSMPModel* model, char* name, double* value);
+GSMP_API int GSMP_Model_GetVariableDescription(GSMPModel *model, char *name, int *value);
 
-GSMP_API int GSMP_Model_GetVariable_Int(GSMPModel* model, char* name, int* value);
-GSMP_API int GSMP_Model_GetVariable_Float(GSMPModel* model, char* name, float* value);
-GSMP_API int GSMP_Model_GetVariable_Double(GSMPModel* model, char* name, double* value);
+GSMP_API int GSMP_Model_SetVariable_Int(GSMPModel *model, char *name, int *value);
+
+GSMP_API int GSMP_Model_SetVariable_Float(GSMPModel *model, char *name, float *value);
+
+GSMP_API int GSMP_Model_SetVariable_Double(GSMPModel *model, char *name, double *value);
+
+GSMP_API int GSMP_Model_GetVariable_Int(GSMPModel *model, char *name, int *value);
+
+GSMP_API int GSMP_Model_GetVariable_Float(GSMPModel *model, char *name, float *value);
+
+GSMP_API int GSMP_Model_GetVariable_Double(GSMPModel *model, char *name, double *value);
 
 // ... TODO: GSMP Supported Types //
 // ... TODO: GSMP Supported Arrays //
 
-#endif // !GSMP_MODEL_H
+#endif // GSMP_MODEL_H
 

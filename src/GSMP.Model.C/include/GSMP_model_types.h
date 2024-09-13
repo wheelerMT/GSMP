@@ -5,8 +5,8 @@
 *
 /* ────────────────────────────────────────────────────────────────── */
 
-#ifndef GSMP_MODELTYPES_H
-#define	GSMP_MODELTYPES_H
+#ifndef GSMP_MODEL_TYPES_H
+#define	GSMP_MODEL_TYPES_H
 
 /* ┌────────────────────────────────────────────────────────────────┐ */
 /* │                      GSMP MODEL ENUMERATIONS                   │ */
@@ -30,11 +30,12 @@ enum GSMP_Return {
 /* └────────────────────────────────────────────────────────────────┘ */
 
 typedef struct GSMP_Variable {
-    char* name;
+    char *name;
     enum GSMP_VariableType type;
-    char* description;
-    void* pValue;
+    char *description;
+    void *pValue;
 } GSMP_Variable_t;
+
 // TODO: Switch to type specific versions vs generic.
 
-#endif // !GSMP_MODELTYPES_H
+#endif // GSMP_MODEL_TYPES_H
