@@ -10,7 +10,7 @@
 /* └────────────────────────────────────────────────────────────────┘ */
 
 enum class GSMP_VariableType {
-    Int = 1,
+    Int,
     Float,
     Double
 };
