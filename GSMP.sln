@@ -31,10 +31,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GSMP.Model.C", "GSMP.Model.C", "{6D9A348E-0C97-46AD-8117-801BC11AAC3E}"
 	ProjectSection(SolutionItems) = preProject
 		src\GSMP.Model.C\CMakeLists.txt = src\GSMP.Model.C\CMakeLists.txt
-		src\GSMP.Model.C\GSMP.Model.C.vcxproj.filters = src\GSMP.Model.C\GSMP.Model.C.vcxproj.filters
 		src\GSMP.Model.C\include\GSMP_model_types.h = src\GSMP.Model.C\include\GSMP_model_types.h
 		src\GSMP.Model.C\include\GSMP_model.h = src\GSMP.Model.C\include\GSMP_model.h
-		src\GSMP.Model.C\GSMP.Model.C.vcxproj = src\GSMP.Model.C\GSMP.Model.C.vcxproj
 		src\GSMP.Model.C\src\model.c = src\GSMP.Model.C\src\model.c
 	EndProjectSection
 EndProject
