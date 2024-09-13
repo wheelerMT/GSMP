@@ -1,5 +1,5 @@
 ﻿/* ────────────────────────────────────────────────────────────────── *
-* FILENAME : GSMP_Model.h
+* FILENAME : GSMP_model.h
 *
 * DESCRIPTION : Declares external functions to implement the Model
 *               Interface.

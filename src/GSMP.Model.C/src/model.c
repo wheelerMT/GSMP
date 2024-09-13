@@ -1,5 +1,5 @@
 ﻿/* ────────────────────────────────────────────────────────────────── *
-* FILENAME : GSMP_Model.c
+* FILENAME : model.c
 *
 * DESCRIPTION : Defines external functions to implement the Model
 *               Interface for this specific Model.

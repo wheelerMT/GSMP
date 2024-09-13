@@ -1,5 +1,5 @@
 ﻿/* ────────────────────────────────────────────────────────────────── *
-* FILENAME : GSMP_ModelTypes.h
+* FILENAME : GSMP_model_types.h
 *
 * DESCRIPTION : Declares all common GSMP Model types.
 *
