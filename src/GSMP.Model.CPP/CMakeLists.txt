@@ -1,6 +1,7 @@
+# Set the headers of the library
 set(HEADER_LIST "include/model.h")
 
-# Make an automatic library - will be static or dynamic based on user setting
+# Make an automatic shared library
 add_library(GSMP_CPP SHARED src/model.cpp ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too
