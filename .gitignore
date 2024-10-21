@@ -398,3 +398,4 @@ FodyWeavers.xsd
 # CMake
 cmake-build-debug/
 cmake-build-release/
+build/
