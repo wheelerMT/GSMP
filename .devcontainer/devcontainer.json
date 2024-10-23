@@ -23,9 +23,9 @@
                 "ms-vscode.cpptools",
                 "twxs.cmake",
                 "ms-vscode.cmake-tools",
-                "csharpier.csharpier-vscode",
                 "jebbs.plantuml",
-                "streetsidesoftware.code-spell-checker"
+                "streetsidesoftware.code-spell-checker",
+                "usernamehw.errorlens"
             ]
         }
     }

@@ -1,8 +1,5 @@
 {
   "editor.formatOnSave": true,
-  "[csharp]": {
-    "editor.defaultFormatter": "csharpier.csharpier-vscode"
-  },
   "[plantuml]": {
     "editor.defaultFormatter": "jebbs.plantuml"
   },
@@ -12,15 +9,5 @@
   "plantuml.includepaths": [
     "docs/PlantUML/diagrams/style",
     "docs/PlantUML/diagrams/src"
-  ],
-  "cSpell.language": "en-GB",
-  "cSpell.enableFiletypes": ["plantuml"],
-  "cSpell.words": [
-    "Avalonia",
-    "Blazor",
-    "enduml",
-    "GSMP",
-    "plantuml",
-    "startuml"
   ]
 }
