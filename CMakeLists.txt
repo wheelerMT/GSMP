@@ -36,8 +36,8 @@ endif ()
 include(FetchContent)
 
 # The compiled library code is here
-add_subdirectory(src/GSMP.Model.C)
-add_subdirectory(src/GSMP.Model.CPP)
+add_subdirectory(src/models/C)
+add_subdirectory(src/models/CPP)
 
 # Testing only available if this is the main app
 # Emergency override MODERN_CMAKE_BUILD_TESTING provided as well
