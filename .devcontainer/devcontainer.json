@@ -20,9 +20,7 @@
                 "ms-vscode.cmake-tools",
                 "jebbs.plantuml",
                 "streetsidesoftware.code-spell-checker",
-                "usernamehw.errorlens",
-                "WakaTime.vscode-wakatime",
-                "SonarSource.sonarlint-vscode"
+                "usernamehw.errorlens"
             ]
         }
     }
