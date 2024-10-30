@@ -4,8 +4,8 @@ FROM ubuntu:24.10
 RUN apt-get update \
     && apt-get -y upgrade \
     && apt-get -y install \
-        clang \
-        clangd \
-        cmake \
-        git \
+    clang \
+    clangd \
+    cmake \
+    git \
     && apt-get clean
