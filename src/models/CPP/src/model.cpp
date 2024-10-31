@@ -1,33 +1,24 @@
 #include "model.h"
-#include "GSMP_model_types.h"
+#include "model_types.h"
 
-Model::Model()
-{
-    initialise();
-}
+Model::Model() { initialise(); }
 
-Model::~Model()
-{
-    terminate();
-}
+Model::~Model() { terminate(); }
 
-void Model::AddVariable(const GSMP_Variable &variable)
-{
-    variables.push_back(variable);
-}
+void Model::add_variable(const ModelVariable &variable) { variables.push_back(variable); }
 
 void Model::initialise()
 {
     // Create a set of inputs
     for (int i = 0; i < 3; ++i)
     {
-        variables.push_back(createVariable(static_cast<GSMP_VariableType>(i), GSMP_VariableIntent::Input));
+        variables.push_back(create_variable(static_cast<ModelVariableType>(i), ModelVariableIntent::Input));
     }
 
     // Create a set of outputs
     for (int i = 0; i < 3; ++i)
     {
-        variables.push_back(createVariable(static_cast<GSMP_VariableType>(i), GSMP_VariableIntent::Output));
+        variables.push_back(create_variable(static_cast<ModelVariableType>(i), ModelVariableIntent::Output));
     }
 }
 
@@ -41,17 +32,17 @@ void Model::step() const
 {
     for (auto variable: variables)
     {
-        if (variable.intent == GSMP_VariableIntent::Output)
+        if (variable.intent == ModelVariableIntent::Output)
         {
             switch (variable.type)
             {
-                case GSMP_VariableType::Int:
+                case ModelVariableType::Int:
                     variable.value = std::get<int>(variable.value) + 1;
                     break;
-                case GSMP_VariableType::Float:
+                case ModelVariableType::Float:
                     variable.value = std::get<float>(variable.value) + 1.0f;
                     break;
-                case GSMP_VariableType::Double:
+                case ModelVariableType::Double:
                     variable.value = std::get<double>(variable.value) + 1.0;
                     break;
             }
@@ -59,27 +50,24 @@ void Model::step() const
     }
 }
 
-void Model::terminate()
-{
-    variables.clear();
-}
+void Model::terminate() { variables.clear(); }
 
-GSMP_Variable Model::createVariable(GSMP_VariableType type, GSMP_VariableIntent intent)
+ModelVariable Model::create_variable(ModelVariableType type, ModelVariableIntent intent)
 {
     // Determine default value based on type
     std::string name;
     std::variant<int, float, double> value;
     switch (type)
     {
-        case GSMP_VariableType::Int:
+        case ModelVariableType::Int:
             value = 1;
             name = "int";
             break;
-        case GSMP_VariableType::Float:
+        case ModelVariableType::Float:
             value = 1.0f;
             name = "float";
             break;
-        case GSMP_VariableType::Double:
+        case ModelVariableType::Double:
             value = 1.0;
             name = "double";
             break;
@@ -91,13 +79,14 @@ GSMP_Variable Model::createVariable(GSMP_VariableType type, GSMP_VariableIntent 
     std::string prefix;
     switch (intent)
     {
-        case GSMP_VariableIntent::Input:
+        case ModelVariableIntent::Input:
             prefix = "i_";
             break;
-        case GSMP_VariableIntent::Output:
+        case ModelVariableIntent::Output:
             prefix = "o_";
             break;
-        default: prefix = "undef_";
+        default:
+            prefix = "undef_";
     }
     name = prefix + name;
 

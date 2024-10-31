@@ -12,7 +12,7 @@
 /* │                      GSMP MODEL ENUMERATIONS                   │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-enum GSMP_VariableType {
+enum ModelVariableType {
     GSMP_Int = 1,
     GSMP_Float = 2,
     GSMP_Double = 3
@@ -29,9 +29,9 @@ enum GSMP_Return {
 /* │                     GSMP MODEL VARIABLE TYPES                  │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-typedef struct GSMP_Variable {
+typedef struct ModelVariable {
     char *name;
-    enum GSMP_VariableType type;
+    enum ModelVariableType type;
     char *description;
     void *pValue;
 } GSMP_Variable_t;

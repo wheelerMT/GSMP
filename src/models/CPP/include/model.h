@@ -1,26 +1,17 @@
 #ifndef MODEL_H
 #define MODEL_H
 #include <list>
-#include "GSMP_model_types.h"
+#include "model_types.h"
 
 class Model {
 public:
-    std::list<GSMP_Variable> variables;
+    std::list<ModelVariable> variables;
 
     Model();
 
     ~Model();
 
-    /* ┌────────────────────────────────────────────────────────────────┐ */
-    /* │                      Model Backend Setup                       │ */
-    /* └────────────────────────────────────────────────────────────────┘ */
-
-    // Add a variable to the model list
-    void AddVariable(const GSMP_Variable &variable);
-
-    /* ┌────────────────────────────────────────────────────────────────┐ */
-    /* │                      Model Runtime                             │ */
-    /* └────────────────────────────────────────────────────────────────┘ */
+    void add_variable(const ModelVariable &variable);
 
     void initialise();
 
@@ -32,6 +23,7 @@ public:
 
 private:
     // Helper function for creating a variable
-    static GSMP_Variable createVariable(GSMP_VariableType type, GSMP_VariableIntent intent);
+    static ModelVariable create_variable(ModelVariableType type, ModelVariableIntent intent);
 };
-#endif //MODEL_H
+
+#endif // MODEL_H
