@@ -15,12 +15,12 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-vscode.cpptools",
                 "twxs.cmake",
                 "ms-vscode.cmake-tools",
                 "jebbs.plantuml",
                 "streetsidesoftware.code-spell-checker",
-                "usernamehw.errorlens"
+                "usernamehw.errorlens",
+                "llvm-vs-code-extensions.vscode-clangd"
             ]
         }
     }

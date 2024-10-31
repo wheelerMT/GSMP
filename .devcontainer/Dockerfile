@@ -1,8 +1,14 @@
-FROM mcr.microsoft.com/devcontainers/cpp:1-ubuntu-24.04
+FROM ubuntu:24.10
 
 # Install additional packages
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends dotnet-sdk-8.0
+RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get -y install \
+        clang \
+        clangd \
+        cmake \
+        git \
+    && apt-get clean
 
 # Ensure workspace is allowed by git
-RUN git config --global --add safe.directory /workspaces/GSMP
+# RUN git config --global --add safe.directory /workspaces/GSMP
