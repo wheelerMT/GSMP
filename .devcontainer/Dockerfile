@@ -9,6 +9,3 @@ RUN apt-get update \
         cmake \
         git \
     && apt-get clean
-
-# Ensure workspace is allowed by git
-# RUN git config --global --add safe.directory /workspaces/GSMP
