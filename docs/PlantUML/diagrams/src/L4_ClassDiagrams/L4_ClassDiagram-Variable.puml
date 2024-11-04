@@ -1,106 +1,105 @@
-@startuml L4_Class Diagram - Variable
+@startuml L4_Class Diagram - VariableManager
 'https://plantuml.com/class-diagram
 
 ' Class definitions
-class C_API_ModelVariableManager <<C API>> {
+class C_API_VariableManager <<C API>> {
     .. Manager Instantiation ..
-    GSMP_API GSMP_VariableManager_Create(GSMP_VariableManager *manager)
-    GSMP_API GSMP_VariableManager_Destroy(GSMP_VariableManager *manager)
-
+    GSMP_API VariableManager_Create(VariableManager* instance)
+    GSMP_API VariableManager_Destroy(VariableManager* instance)
     .. Variable Instantiation ..
-    GSMP_API GSMP_VariableManager_CreateVariable(GSMP_VariableManager *manager, char *name, ...)
-    GSMP_API GSMP_VariableManager_DestroyVariable(GSMP_VariableManager *manager, char *name)
-
+    GSMP_API VariableManager_CreateVariable(VariableManager* instance, char* name, ...)
+    GSMP_API VariableManager_DestroyVariable(VariableManager* instance, char* name)
     .. Variables ..
-    GSMP_API GSMP_VariableManager_GetVariableType(GSMP_VariableManager *manager, char *name, int *type)
-    GSMP_API GSMP_VariableManager_GetVariableDescription(GSMP_VariableManager *manager, char *name, char *description)
-    GSMP_API GSMP_VariableManager_GetVariableSize(GSMP_VariableManager *manager, char *name, int *size, int* sizeLength)
-    GSMP_API GSMP_VariableManager_GetVariableIntent(GSMP_VariableManager *manager, char *name, int *intent)
-    GSMP_API GSMP_VariableManager_SetVariable_Int(GSMP_VariableManager *manager, char *name, int *value)
+    GSMP_API VariableManager_GetVariableType(VariableManager* instance, char* name, int* type)
+    GSMP_API VariableManager_GetVariableDescription(VariableManager* instance, char* name, char* description)
+    GSMP_API VariableManager_GetVariableSize(VariableManager* instance, char* name, int* size, int* sizeLength)
+    GSMP_API VariableManager_GetVariableIntent(VariableManager* instance, char* name, int* intent)
+    GSMP_API VariableManager_SetVariable_Int(VariableManager* instance, char* name, int* value)
     ..  . . .  ..
-    GSMP_API GSMP_Model_GetVariable_Int(char *name, int *value)
+    GSMP_API VariableManager_GetVariable_Int(char* name, int* value)
     ..  . . .  ..
 }
 
 class VariableManager <<namespace::GSMP>> {
-  + List<Variable> Variable
+    + List<Variable> Variable
 
-  .. Instantiation ..
-  + Add
-  +
+    .. Variable Management ..
+    + ReturnCode AddVariable();
+    + ReturnCode RemoveVariable();
 
-  + GSMP_ReturnCode GetVariableType(string name, GSMP_VariableType type)
-  + GSMP_ReturnCode GetVariableDescription(string name, string description)
-  + GSMP_ReturnCode GetVariableSize(string name, list<int> size)
-  + GSMP_ReturnCode GetVariableIntent(string name, GSMP_VariableIntent intent)
-  + GSMP_ReturnCode GetVariable(string name, ...???...)
-  + GSMP_ReturnCode SetVariable(string name, ...???...)
+  .. Variable Interaction ..
+    + ReturnCode GetVariableType(string name, VariableType type)
+    + ReturnCode GetVariableDescription(string name, string description)
+    + ReturnCode GetVariableSize(string name, list<int> size)
+    + ReturnCode GetVariableIntent(string name, VariableIntent intent)
+    + ReturnCode GetVariable(string name, ...???...)
+    + ReturnCode SetVariable(string name, ...???...)
 }
 
 class Variable<T> {
-  String Name
-  String Description
-  Type Type
-  VariableIntent Intent
-  T DefaultValue
-  List<int> Dimensions
+    String Name
+    String Description
+    Type Type
+    VariableIntent Intent
+    T DefaultValue
+    List<int> Dimensions
 }
 
 ' Notes
 note right of Variable::Type
-  This is inferred from T
+    This is inferred from T
 end note
 
 note right of Variable::DefaultValue
-  This needs to be defined with generics
-  to ensure it works with all types.
+    This needs to be defined with generics
+    to ensure it works with all types.
 end note
 
 note left of Variable::Dimensions
-  Each element of the list specifies a dimension,
-  which get appended to the list when the variable
-  is registered.
-  
-  E.g., a list of [2, 3, 4] implies this variable is a
-  2x3x4 matrix.
+    Each element of the list specifies a dimension,
+    which get appended to the list when the variable
+    is registered.
+    
+    E.g., a list of [2, 3, 4] implies this variable is a
+    2x3x4 matrix.
 end note
 
 ' Relationships
 
 ' Define C Relationships (including Cpp components)
-C_API_ModelVariableManager ..> VariableManager : calls instance
+C_API_VariableManager ..> VariableManager : calls instance
 VariableManager *-- Variable
-Variable *-- GSMP_VariableIntent
-Variable *-- GSMP_VariableType
-Variable *-- GSMP_ReturnCode
+Variable *-- VariableIntent
+Variable *-- VariableType
+Variable *-- ReturnCode
 
 ' -- Enumerated Type Definitions --
-enum GSMP_VariableIntent {
+enum VariableIntent {
     Undefined
     Input
     Output
     Override
 }
 
-enum GSMP_VariableType {
-    GSMP_double [double]
-    GSMP_single [float]
-    GSMP_byte [int8_t]
-    GSMP_unsignedByte [uint8_t]
-    GSMP_short [int16_t]
-    GSMP_unsignedShort [uint16_t]
-    GSMP_int [int32_t]
-    GSMP_unsignedInt [uint32_t]
-    GSMP_long [int64_t]
-    GSMP_unsignedLong [uint64_t]
-    GSMP_boolean [bool]
-    GSMP_string [char*]
+enum VariableType {
+    double [double]
+    single [float]
+    byte [int8_t]
+    unsignedByte [uint8_t]
+    short [int16_t]
+    unsignedShort [uint16_t]
+    int [int32_t]
+    unsignedInt [uint32_t]
+    long [int64_t]
+    unsignedLong [uint64_t]
+    boolean [bool]
+    string [char*]
 }
 
-enum GSMP_ReturnCode {
-    GSMP_ERROR = -1
-    GSMP_OK = 0
-    GSMP_PENDING = 1
+enum ReturnCode {
+    ERROR = -1
+    OK = 0
+    PENDING = 1
 }
 
 @enduml

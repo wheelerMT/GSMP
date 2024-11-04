@@ -1,68 +1,76 @@
-@startuml L4_Class Diagram - Variable
+@startuml L4_Class Diagram - Model
 'https://plantuml.com/class-diagram
 
 class C_API_Model <<C API>> {
     .. Instance Management ..
-    GSMP_API GSMP_Model_Create(GSMP_Model *model)
-    GSMP_API GSMP_Model_Destroy(GSMP_Model *model)
+    GSMP_API Model_Create(Model* instance)
+    GSMP_API Model_Destroy(Model* instance)
 
     .. Runtime ..
-    GSMP_API GSMP_Model_Initialize(GSMP_Model *model)
-    GSMP_API GSMP_Model_Reinitialize(GSMP_Model *model)
-    GSMP_API GSMP_Model_Step(GSMP_Model *model)
-    GSMP_API GSMP_Model_Terminate(GSMP_Model *model)
+    GSMP_API Model_Initialize(Model* instance)
+    GSMP_API Model_Reinitialize(Model* instance)
+    GSMP_API Model_Step(Model* instance)
+    GSMP_API Model_Terminate(Model* instance)
 
     .. Variables ..
-    GSMP_API GSMP_Model_GetVariableType(GSMP_Model *model, char *name, int *type)
-    GSMP_API GSMP_Model_GetVariableDescription(GSMP_Model *model, char *name, char *description)
-    GSMP_API GSMP_Model_GetVariableSize(GSMP_Model *model, char *name, int *size, int* sizeLength)
-    GSMP_API GSMP_Model_GetVariableIntent(GSMP_Model *model, char *name, int *intent)
-    GSMP_API GSMP_Model_SetVariable_Int(GSMP_Model *model, char *name, int *value)
+    GSMP_API Model_GetVariableType(Model* instance, char* name, int* type)
+    GSMP_API Model_GetVariableDescription(Model* instance, char* name, char* description)
+    GSMP_API Model_GetVariableSize(Model* instance, char* name, int* size, int* sizeLength)
+    GSMP_API Model_GetVariableIntent(Model* instance, char* name, int* intent)
+    GSMP_API Model_SetVariable_Int(Model* instance, char* name, int* value)
     ..  . . .  ..
-    GSMP_API GSMP_Model_GetVariable_Int(GSMP_Model *model, char *name, int *value)
+    GSMP_API Model_GetVariable_Int(Model* instance, char* name, int* value)
     ..  . . .  ..
 }
 
-abstract ModelBase <<namespace::GSMP>> {
-    ' - GSMP_PlatformOptions platform ' FUTURE WORK
-    ' - GSMP_ModelOptions options ' FUTURE WORK
-
-    .. Instantiation ..
-    + GSMP_ReturnCode GetVariableInformation(string information)
-
-    .. Runtime ..
-    + GSMP_ReturnCode Initialize()
-    + GSMP_ReturnCode Reinitialize()
-    + GSMP_ReturnCode Step()
-    + GSMP_ReturnCode Terminate()
-
-    .. Variables ..
-    + GSMP_ReturnCode GetVariableType(string name, GSMP_VariableType type)
-    + GSMP_ReturnCode GetVariableDescription(string name, string description)
-    + GSMP_ReturnCode GetVariableSize(string name, list<int> size)
-    + GSMP_ReturnCode GetVariableIntent(string name, GSMP_VariableIntent intent)
-    + GSMP_ReturnCode GetVariable(string name, ...???...)
-    + GSMP_ReturnCode SetVariable(string name, ...???...)
-}
-
-class ModelCpp <<namespace::GSMP>> {
-    ModelVariableManager variables
-}
-
-class ModelC <<namespace::GSMP>> {
-}
-
-class ModelCBackend <<C API>> {
-    ModelVariableManager variables
-}
-
-' -- Notes --
 note left of C_API_Model
     .. GSMP_API ..
     Pre-processor definition of
     linkage, visibility, and
     return type.
 end note
+
+abstract Model <<namespace::GSMP>> {
+    ' - GSMP_PlatformOptions platform ' FUTURE WORK
+    ' - ModelOptions options ' FUTURE WORK
+    .. Instantiation ..
+    + ReturnCode GetVariableInformation(string information)
+
+    .. Runtime ..
+    + ReturnCode Initialize()
+    + ReturnCode Reinitialize()
+    + ReturnCode Step()
+    + ReturnCode Terminate()
+
+    .. Variables ..
+    + ReturnCode GetVariableType(string name, VariableType type)
+    + ReturnCode GetVariableDescription(string name, string description)
+    + ReturnCode GetVariableSize(string name, list<int> size)
+    + ReturnCode GetVariableIntent(string name, VariableIntent intent)
+    + ReturnCode GetVariable(string name, ...???...)
+    + ReturnCode SetVariable(string name, ...???...)
+}
+
+note right of Model
+    <?> Default format of Interface 
+    Requirements Specification for
+    the Modelling Platform. <?>
+end note
+
+note right of Model
+    Use Cpp 'Generics'.
+end note
+
+class ModelCpp <<namespace::GSMP>> {
+    VariableManager variables
+}
+
+class ModelC <<namespace::GSMP>> {
+}
+
+class ModelCBackend <<C API>> {
+    VariableManager variables
+}
 
 note left of ModelCpp
     Variable methods, might 
@@ -72,47 +80,47 @@ end note
 
 ' -- Relationships --
 ' Define Cpp relationships
-ModelBase --|> ModelCpp : implements
-ModelCpp *-- ModelVariableManager : uses
+Model --|> ModelCpp : implements
+ModelCpp *-- VariableManager : uses
 
 ' Define C Relationships (including Cpp components)
-C_API_Model ..> ModelBase : calls instance
-ModelBase --|> ModelC : implements
+C_API_Model ..> Model : calls instance
+Model --|> ModelC : implements
 ModelC ..> ModelCBackend : wraps
-ModelCBackend --> C_API_ModelVariableManager : calls instance
-C_API_ModelVariableManager ..> ModelVariableManager : calls instance
+ModelCBackend --> C_API_VariableManager : calls instance
+C_API_VariableManager ..> VariableManager : calls instance
 
-' C_API_Model --> GSMP_ReturnCode : uses
-' C_API_Model --> GSMP_VariableIntent : uses
-' C_API_Model --> GSMP_VariableType : uses
+' C_API_Model --> ReturnCode : uses
+' C_API_Model --> VariableIntent : uses
+' C_API_Model --> VariableType : uses
 
 ' -- Enumerated Type Definitions --
-enum GSMP_VariableIntent {
+enum VariableIntent {
     Undefined
     Input
     Output
     Override
 }
 
-enum GSMP_VariableType {
-    GSMP_double [double]
-    GSMP_single [float]
-    GSMP_byte [int8_t]
-    GSMP_unsignedByte [uint8_t]
-    GSMP_short [int16_t]
-    GSMP_unsignedShort [uint16_t]
-    GSMP_int [int32_t]
-    GSMP_unsignedInt [uint32_t]
-    GSMP_long [int64_t]
-    GSMP_unsignedLong [uint64_t]
-    GSMP_boolean [bool]
-    GSMP_string [char*]
+enum VariableType {
+    double [double]
+    single [float]
+    byte [int8_t]
+    unsignedByte [uint8_t]
+    short [int16_t]
+    unsignedShort [uint16_t]
+    int [int32_t]
+    unsignedInt [uint32_t]
+    long [int64_t]
+    unsignedLong [uint64_t]
+    boolean [bool]
+    string [char*]
 }
 
-enum GSMP_ReturnCode {
-    GSMP_ERROR = -1
-    GSMP_OK = 0
-    GSMP_PENDING = 1
+enum ReturnCode {
+    ERROR = -1
+    OK = 0
+    PENDING = 1
 }
 
 @enduml
