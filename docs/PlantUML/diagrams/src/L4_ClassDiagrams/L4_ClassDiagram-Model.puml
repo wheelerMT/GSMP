@@ -1,0 +1,118 @@
+@startuml L4_Class Diagram - Variable
+'https://plantuml.com/class-diagram
+
+class C_API_Model <<C API>> {
+    .. Instance Management ..
+    GSMP_API GSMP_Model_Create(GSMP_Model *model)
+    GSMP_API GSMP_Model_Destroy(GSMP_Model *model)
+
+    .. Runtime ..
+    GSMP_API GSMP_Model_Initialize(GSMP_Model *model)
+    GSMP_API GSMP_Model_Reinitialize(GSMP_Model *model)
+    GSMP_API GSMP_Model_Step(GSMP_Model *model)
+    GSMP_API GSMP_Model_Terminate(GSMP_Model *model)
+
+    .. Variables ..
+    GSMP_API GSMP_Model_GetVariableType(GSMP_Model *model, char *name, int *type)
+    GSMP_API GSMP_Model_GetVariableDescription(GSMP_Model *model, char *name, char *description)
+    GSMP_API GSMP_Model_GetVariableSize(GSMP_Model *model, char *name, int *size, int* sizeLength)
+    GSMP_API GSMP_Model_GetVariableIntent(GSMP_Model *model, char *name, int *intent)
+    GSMP_API GSMP_Model_SetVariable_Int(GSMP_Model *model, char *name, int *value)
+    ..  . . .  ..
+    GSMP_API GSMP_Model_GetVariable_Int(GSMP_Model *model, char *name, int *value)
+    ..  . . .  ..
+}
+
+abstract ModelBase <<namespace::GSMP>> {
+    ' - GSMP_PlatformOptions platform ' FUTURE WORK
+    ' - GSMP_ModelOptions options ' FUTURE WORK
+
+    .. Instantiation ..
+    + GSMP_ReturnCode GetVariableInformation(string information)
+
+    .. Runtime ..
+    + GSMP_ReturnCode Initialize()
+    + GSMP_ReturnCode Reinitialize()
+    + GSMP_ReturnCode Step()
+    + GSMP_ReturnCode Terminate()
+
+    .. Variables ..
+    + GSMP_ReturnCode GetVariableType(string name, GSMP_VariableType type)
+    + GSMP_ReturnCode GetVariableDescription(string name, string description)
+    + GSMP_ReturnCode GetVariableSize(string name, list<int> size)
+    + GSMP_ReturnCode GetVariableIntent(string name, GSMP_VariableIntent intent)
+    + GSMP_ReturnCode GetVariable(string name, ...???...)
+    + GSMP_ReturnCode SetVariable(string name, ...???...)
+}
+
+class ModelCpp <<namespace::GSMP>> {
+    ModelVariableManager variables
+}
+
+class ModelC <<namespace::GSMP>> {
+}
+
+class ModelCBackend <<C API>> {
+    ModelVariableManager variables
+}
+
+' -- Notes --
+note left of C_API_Model
+    .. GSMP_API ..
+    Pre-processor definition of
+    linkage, visibility, and
+    return type.
+end note
+
+note left of ModelCpp
+    Variable methods, might 
+    need variable manager instance
+    as arguement.
+end note
+
+' -- Relationships --
+' Define Cpp relationships
+ModelBase --|> ModelCpp : implements
+ModelCpp *-- ModelVariableManager : uses
+
+' Define C Relationships (including Cpp components)
+C_API_Model ..> ModelBase : calls instance
+ModelBase --|> ModelC : implements
+ModelC ..> ModelCBackend : wraps
+ModelCBackend --> C_API_ModelVariableManager : calls instance
+C_API_ModelVariableManager ..> ModelVariableManager : calls instance
+
+' C_API_Model --> GSMP_ReturnCode : uses
+' C_API_Model --> GSMP_VariableIntent : uses
+' C_API_Model --> GSMP_VariableType : uses
+
+' -- Enumerated Type Definitions --
+enum GSMP_VariableIntent {
+    Undefined
+    Input
+    Output
+    Override
+}
+
+enum GSMP_VariableType {
+    GSMP_double [double]
+    GSMP_single [float]
+    GSMP_byte [int8_t]
+    GSMP_unsignedByte [uint8_t]
+    GSMP_short [int16_t]
+    GSMP_unsignedShort [uint16_t]
+    GSMP_int [int32_t]
+    GSMP_unsignedInt [uint32_t]
+    GSMP_long [int64_t]
+    GSMP_unsignedLong [uint64_t]
+    GSMP_boolean [bool]
+    GSMP_string [char*]
+}
+
+enum GSMP_ReturnCode {
+    GSMP_ERROR = -1
+    GSMP_OK = 0
+    GSMP_PENDING = 1
+}
+
+@enduml
