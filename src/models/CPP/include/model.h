@@ -1,12 +1,11 @@
 #ifndef MODEL_H
 #define MODEL_H
 #include <list>
-#include "model_types.h"
+#include <unordered_map>
+#include "model_variable.h"
 
 class Model {
 public:
-    std::list<ModelVariable> variables;
-
     Model();
 
     ~Model();
@@ -17,13 +16,18 @@ public:
 
     void reinitialise();
 
-    void step() const;
+    void step();
 
     void terminate();
 
+    std::list<ModelVariable> variables() const;
+
+    ModelVariable get_variable(const std::string &name) const;
+
+    void update_variable(std::string name, GSMPType value);
+
 private:
-    // Helper function for creating a variable
-    static ModelVariable create_variable(ModelVariableType type, ModelVariableIntent intent);
+    std::unordered_map<std::string, ModelVariable> _variables;
 };
 
 #endif // MODEL_H
