@@ -14,9 +14,11 @@ class C_API_VariableManager <<C API>> {
     GSMP_API VariableManager_GetVariableDescription(VariableManager* instance, char* name, char* description)
     GSMP_API VariableManager_GetVariableSize(VariableManager* instance, char* name, int* size, int* sizeLength)
     GSMP_API VariableManager_GetVariableIntent(VariableManager* instance, char* name, int* intent)
-    GSMP_API VariableManager_SetVariable_Int(VariableManager* instance, char* name, int* value)
+    GSMP_API VariableManager_GetVariableDefault_Int(VariableManager* instance, char* name, int* value)
     ..  . . .  ..
-    GSMP_API VariableManager_GetVariable_Int(char* name, int* value)
+    GSMP_API VariableManager_GetVariable_Int(VariableManager* instance, char* name, int* value)
+    ..  . . .  ..
+    GSMP_API VariableManager_SetVariable_Int(VariableManager* instance, char* name, int* value)
     ..  . . .  ..
 }
 
