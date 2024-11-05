@@ -1,6 +1,8 @@
 @startuml L4_Class Diagram - Model
 'https://plantuml.com/class-diagram
 
+
+
 class C_API_Model <<C API>> {
     .. Instance Management ..
     GSMP_API Model_Create(Model* instance)
@@ -21,80 +23,104 @@ class C_API_Model <<C API>> {
     ..  . . .  ..
     GSMP_API Model_GetVariable_Int(Model* instance, char* name, int* value)
     ..  . . .  ..
+    GSMP_API Model_GetVariableDefault_Int(Model* instance, char* name, int* defaultValue)
+    ..  . . .  ..
 }
 
-note left of C_API_Model
-    .. GSMP_API ..
-    Pre-processor definition of
-    linkage, visibility, and
-    return type.
+note right of C_API_Model
+    **GSMP_API** is pre-processor
+    definition of linkage,
+    visibility, & return type.
 end note
 
-abstract Model <<namespace::GSMP>> {
-    ' - GSMP_PlatformOptions platform ' FUTURE WORK
-    ' - ModelOptions options ' FUTURE WORK
-    .. Instantiation ..
-    + ReturnCode GetVariableInformation(string information)
+namespace GSMP {
+    abstract Model <<namespace::GSMP>> {
+        .. Instantiation ..
+        + ReturnCode GetVariableInformation(string information)
 
-    .. Runtime ..
-    + ReturnCode Initialize()
-    + ReturnCode Reinitialize()
-    + ReturnCode Step()
-    + ReturnCode Terminate()
+        .. Runtime ..
+        + {abstract} ReturnCode Initialize()
+        + {abstract} ReturnCode Reinitialize()
+        + {abstract} ReturnCode Step()
+        + {abstract} ReturnCode Terminate()
 
-    .. Variables ..
-    + ReturnCode GetVariableType(string name, VariableType type)
-    + ReturnCode GetVariableDescription(string name, string description)
-    + ReturnCode GetVariableSize(string name, list<int> size)
-    + ReturnCode GetVariableIntent(string name, VariableIntent intent)
-    + ReturnCode GetVariable(string name, ...???...)
-    + ReturnCode SetVariable(string name, ...???...)
-}
+        .. Variables ..
+        + ReturnCode GetVariableType(string name, VariableType type)
+        + ReturnCode GetVariableDescription(string name, string description)
+        + ReturnCode GetVariableSize(string name, list<int> size)
+        + ReturnCode GetVariableIntent(string name, VariableIntent intent)
+        + ReturnCode GetVariableDefault(string name, ...???...)
+        + ReturnCode GetVariable(string name, ...???...)
+        + ReturnCode SetVariable(string name, ...???...)
+    }
 
-note right of Model
-    <?> Default format of Interface 
-    Requirements Specification for
-    the Modelling Platform. <?>
-end note
+    note right of Model::GetVariableInformation
+        What default format of Interface 
+        Requirements Specification for
+        the Modelling Platform?
+    end note
 
-note right of Model
-    Use Cpp 'Generics'.
-end note
+    class ModelCpp <<namespace::GSMP>> {
+        - VariableManager VariableManager
 
-class ModelCpp <<namespace::GSMP>> {
-    VariableManager variables
-}
+        .. Runtime ..
+        + ReturnCode Initialize()
+        + ReturnCode Reinitialize()
+        + ReturnCode Step()
+        + ReturnCode Terminate()
 
-class ModelC <<namespace::GSMP>> {
+        .. Variables ..
+        *Calls VariableManager with Instance*
+        ..  . . .  ..
+    }
+
+    note right of ModelCpp
+        Constructor: Create VariableManager Instance.  
+        Create all variables, generating structure of
+        all pointers to variables.
+    end note
+
+    class ModelC <<namespace::GSMP>> {
+        .. Description ..
+        * Cpp Implementation of Model to call C_API of ModelCBackend.
+        -- TODO --
+    }
+
+    note right of ModelC
+        Constructor: Create VariableManager Instance.  
+        Create all variables, generating structure of
+        all pointers to variables.
+    end note
 }
 
 class ModelCBackend <<C API>> {
-    VariableManager variables
+    .. Description ..
+    * Implementaion of 'Runtime', and uses 'VariableManager' with instance.
+    * Defines all C_API functions called by ModelC.
+    -- TODO --
 }
 
-note left of ModelCpp
-    Variable methods, might 
-    need variable manager instance
-    as arguement.
-end note
+class C_API_VariableManager <<C API>> {
+    Refer to L4_ClassDiagram-VariableManager
+}
 
 ' -- Relationships --
 ' Define Cpp relationships
 Model --|> ModelCpp : implements
-ModelCpp *-- VariableManager : uses
 
-' Define C Relationships (including Cpp components)
+' Define C_API Relationships (including Cpp components)
 C_API_Model ..> Model : calls instance
 Model --|> ModelC : implements
-ModelC ..> ModelCBackend : wraps
+ModelC .down.> ModelCBackend : wraps
 ModelCBackend --> C_API_VariableManager : calls instance
-C_API_VariableManager ..> VariableManager : calls instance
-
-' C_API_Model --> ReturnCode : uses
-' C_API_Model --> VariableIntent : uses
-' C_API_Model --> VariableType : uses
 
 ' -- Enumerated Type Definitions --
+enum ReturnCode {
+    ERROR = -1
+    OK = 0
+    PENDING = 1
+}
+
 enum VariableIntent {
     Undefined
     Input
@@ -117,10 +143,8 @@ enum VariableType {
     string [char*]
 }
 
-enum ReturnCode {
-    ERROR = -1
-    OK = 0
-    PENDING = 1
-}
+' Arrangement
+ReturnCode -[hidden]d-> VariableIntent
+VariableIntent -[hidden]d-> VariableType
 
 @enduml
