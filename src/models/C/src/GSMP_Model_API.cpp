@@ -16,22 +16,19 @@
 // TODO: How to reference into this style of structure. For example
 //       to find name 'iInt'. Might have to consider an alternative
 //       that's an array.
-typedef struct GSMP_Inputs
-{
+typedef struct GSMP_Inputs {
     GSMP_Variable_t iInt;
     GSMP_Variable_t iFloat;
     GSMP_Variable_t iDouble;
 } GSMPInputs_t;
 
-typedef struct GSMPOutputs
-{
+typedef struct GSMPOutputs {
     GSMP_Variable_t oInt;
     GSMP_Variable_t oFloat;
     GSMP_Variable_t oDouble;
 } GSMPOutputs_t;
 
-typedef struct GSMPModel
-{
+typedef struct GSMPModel {
     double time;
     double timeStep;
 
@@ -63,10 +60,7 @@ GSMP_API int GSMP_Model_Destroy(GSMPModel *model)
 // Model Runtime
 /* ────────────────────────────────────────────────────────────────── */
 
-GSMP_API int GSMP_Model_Initialize(GSMPModel *model)
-{
-    return 0;
-}
+GSMP_API int GSMP_Model_Initialize(GSMPModel *model) { return 0; }
 
 GSMP_API int GSMP_Model_Reinitialize(GSMPModel *model)
 {
@@ -107,32 +101,14 @@ GSMP_API int GSMP_Model_GetVariableDescription(GSMPModel *model, char *name, int
     return 0;
 }
 
-GSMP_API int GSMP_Model_SetVariable_Int(GSMPModel *model, char *name, int *value)
-{
-    return 0;
-}
+GSMP_API int GSMP_Model_SetVariable_Int(GSMPModel *model, char *name, int *value) { return 0; }
 
-GSMP_API int GSMP_Model_SetVariable_Float(GSMPModel *model, char *name, float *value)
-{
-    return 0;
-}
+GSMP_API int GSMP_Model_SetVariable_Float(GSMPModel *model, char *name, float *value) { return 0; }
 
-GSMP_API int GSMP_Model_SetVariable_Double(GSMPModel *model, char *name, double *value)
-{
-    return 0;
-}
+GSMP_API int GSMP_Model_SetVariable_Double(GSMPModel *model, char *name, double *value) { return 0; }
 
-GSMP_API int GSMP_Model_GetVariable_Int(GSMPModel *model, char *name, int *value)
-{
-    return 0;
-}
+GSMP_API int GSMP_Model_GetVariable_Int(GSMPModel *model, char *name, int *value) { return 0; }
 
-GSMP_API int GSMP_Model_GetVariable_Float(GSMPModel *model, char *name, float *value)
-{
-    return 0;
-}
+GSMP_API int GSMP_Model_GetVariable_Float(GSMPModel *model, char *name, float *value) { return 0; }
 
-GSMP_API int GSMP_Model_GetVariable_Double(GSMPModel *model, char *name, double *value)
-{
-    return 0;
-}
+GSMP_API int GSMP_Model_GetVariable_Double(GSMPModel *model, char *name, double *value) { return 0; }
