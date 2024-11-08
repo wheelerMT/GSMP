@@ -9,5 +9,8 @@
   "plantuml.includepaths": [
     "docs/PlantUML/diagrams/style",
     "docs/PlantUML/diagrams/src"
+  ],
+  "cSpell.words": [
+    "GSMP"
   ]
 }
