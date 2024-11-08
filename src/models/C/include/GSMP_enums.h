@@ -1,20 +1,21 @@
 ﻿/* ────────────────────────────────────────────────────────────────── *
-* FILENAME : GSMP_model_types.h
-*
-* DESCRIPTION : Declares all common GSMP Model types.
-*
-/* ────────────────────────────────────────────────────────────────── */
+ * FILENAME : GSMP_model_types.h
+ *
+ * DESCRIPTION : Defines all GSMP Enumerations used by:
+ *               Model, VariableManager, & Variable.
+ *
+ *  ────────────────────────────────────────────────────────────────── */
 
-#ifndef GSMP_MODEL_TYPES_H
-#define GSMP_MODEL_TYPES_H
+#ifndef GSMP_ENUMS_H
+#define GSMP_ENUMS_H
 
 /* ┌────────────────────────────────────────────────────────────────┐ */
 /* │                      GSMP ENUMERATIONS                         │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-enum VariableIntent { UNDEFINED, INPUT, OUTPUT, OVERRIDE };
+typedef enum { UNDEFINED, INPUT, OUTPUT, OVERRIDE } VariableIntent;
 
-enum VariableType {
+typedef enum {
     DOUBLE, // double
     SINGLE, // float
     BYTE, // int8_t
@@ -27,8 +28,8 @@ enum VariableType {
     UNSIGNED_LONG, // uint64_t
     BOOLEAN, // bool
     STRING // char*
-};
+} VariableType;
 
-enum ReturnCode { OK = 0, ERROR = -1, PENDING = 1 };
+typedef enum { OK = 0, ERROR = -1, PENDING = 1 } ReturnCode;
 
-#endif // GSMP_MODEL_TYPES_H
+#endif // GSMP_ENUMS_H
