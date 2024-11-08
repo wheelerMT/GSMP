@@ -1,0 +1,107 @@
+@startuml L4_Class Diagram - VariableManager
+'https://plantuml.com/class-diagram
+
+' Class definitions
+class C_API_VariableManager <<C API>> {
+    .. Manager Instantiation ..
+    GSMP_API VariableManager_Create(VariableManager* instance)
+    GSMP_API VariableManager_Destroy(VariableManager* instance)
+    .. Variable Instantiation ..
+    GSMP_API VariableManager_CreateVariable(VariableManager* instance, char* name, ...)
+    GSMP_API VariableManager_DestroyVariable(VariableManager* instance, char* name)
+    .. Variables ..
+    GSMP_API VariableManager_GetVariableType(VariableManager* instance, char* name, int* type)
+    GSMP_API VariableManager_GetVariableDescription(VariableManager* instance, char* name, char* description)
+    GSMP_API VariableManager_GetVariableSize(VariableManager* instance, char* name, int* size, int* sizeLength)
+    GSMP_API VariableManager_GetVariableIntent(VariableManager* instance, char* name, int* intent)
+    GSMP_API VariableManager_GetVariableDefault_Int(VariableManager* instance, char* name, int* value)
+    ..  . . .  ..
+    GSMP_API VariableManager_GetVariable_Int(VariableManager* instance, char* name, int* value)
+    ..  . . .  ..
+    GSMP_API VariableManager_SetVariable_Int(VariableManager* instance, char* name, int* value)
+    ..  . . .  ..
+}
+
+class VariableManager <<namespace::GSMP>> {
+    + List<Variable> Variable
+
+    .. Variable Management ..
+    + ReturnCode AddVariable();
+    + ReturnCode RemoveVariable();
+
+  .. Variable Interaction ..
+    + ReturnCode GetVariableType(string name, VariableType type)
+    + ReturnCode GetVariableDescription(string name, string description)
+    + ReturnCode GetVariableSize(string name, list<int> size)
+    + ReturnCode GetVariableIntent(string name, VariableIntent intent)
+    + ReturnCode GetVariable(string name, ...???...)
+    + ReturnCode SetVariable(string name, ...???...)
+}
+
+class Variable<T> {
+    String Name
+    String Description
+    Type Type
+    VariableIntent Intent
+    T DefaultValue
+    List<int> Dimensions
+}
+
+' Notes
+note right of Variable::Type
+    This is inferred from T
+end note
+
+note right of Variable::DefaultValue
+    This needs to be defined with generics
+    to ensure it works with all types.
+end note
+
+note left of Variable::Dimensions
+    Each element of the list specifies a dimension,
+    which get appended to the list when the variable
+    is registered.
+    
+    E.g., a list of [2, 3, 4] implies this variable is a
+    2x3x4 matrix.
+end note
+
+' Relationships
+
+' Define C Relationships (including Cpp components)
+C_API_VariableManager ..> VariableManager : calls instance
+VariableManager *-- Variable
+Variable *-- VariableIntent
+Variable *-- VariableType
+Variable *-- ReturnCode
+
+' -- Enumerated Type Definitions --
+enum VariableIntent {
+    Undefined
+    Input
+    Output
+    Override
+}
+
+enum VariableType {
+    double [double]
+    single [float]
+    byte [int8_t]
+    unsignedByte [uint8_t]
+    short [int16_t]
+    unsignedShort [uint16_t]
+    int [int32_t]
+    unsignedInt [uint32_t]
+    long [int64_t]
+    unsignedLong [uint64_t]
+    boolean [bool]
+    string [char*]
+}
+
+enum ReturnCode {
+    ERROR = -1
+    OK = 0
+    PENDING = 1
+}
+
+@enduml
