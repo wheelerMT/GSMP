@@ -6,36 +6,29 @@
 /* ────────────────────────────────────────────────────────────────── */
 
 #ifndef GSMP_MODEL_TYPES_H
-#define	GSMP_MODEL_TYPES_H
+#define GSMP_MODEL_TYPES_H
 
 /* ┌────────────────────────────────────────────────────────────────┐ */
-/* │                      GSMP MODEL ENUMERATIONS                   │ */
+/* │                      GSMP ENUMERATIONS                         │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-enum ModelVariableType {
-    GSMP_Int = 1,
-    GSMP_Float = 2,
-    GSMP_Double = 3
+enum VariableIntent { UNDEFINED, INPUT, OUTPUT, OVERRIDE };
+
+enum VariableType {
+    DOUBLE, // double
+    SINGLE, // float
+    BYTE, // int8_t
+    UNSIGNED_BYTE, // uint8_t
+    SHORT, // int16_t
+    UNSIGNED_SHORT, // uint16_t
+    INT, // int32_t
+    UNSIGNED_INT, // uint32_t
+    LONG, // int64_t
+    UNSIGNED_LONG, // uint64_t
+    BOOLEAN, // bool
+    STRING // char*
 };
 
-// TODO: Implement Return Codes
-enum GSMP_Return {
-    GSMP_OK = 0,
-    GSMP_ERROR = -1,
-    GSMP_PENDING = 1
-};
-
-/* ┌────────────────────────────────────────────────────────────────┐ */
-/* │                     GSMP MODEL VARIABLE TYPES                  │ */
-/* └────────────────────────────────────────────────────────────────┘ */
-
-typedef struct ModelVariable {
-    char *name;
-    enum ModelVariableType type;
-    char *description;
-    void *pValue;
-} GSMP_Variable_t;
-
-// TODO: Switch to type specific versions vs generic.
+enum ReturnCode { OK = 0, ERROR = -1, PENDING = 1 };
 
 #endif // GSMP_MODEL_TYPES_H
