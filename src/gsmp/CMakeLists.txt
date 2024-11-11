@@ -1,8 +1,8 @@
 # Set the headers of the library
-set(HEADER_LIST "include/model.h" "include/model_variable.h")
+set(HEADER_LIST "include/model.h" "include/model_variable.h" "include/variable_manager.h")
 
 # Make an automatic shared library
-add_library(GSMP_CPP SHARED src/model.cpp src/model_variable.cpp ${HEADER_LIST})
+add_library(GSMP_CPP SHARED src/model.cpp src/model_variable.cpp  src/variable_manager.cpp ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too
 target_include_directories(GSMP_CPP PUBLIC include)
