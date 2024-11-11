@@ -1,16 +1,12 @@
 #ifndef MODEL_H
 #define MODEL_H
-#include <list>
-#include <unordered_map>
-#include "model_variable.h"
+#include "variable_manager.h"
 
 class Model {
 public:
     Model();
 
     ~Model();
-
-    void add_variable(const ModelVariable &variable);
 
     void initialise();
 
@@ -20,14 +16,10 @@ public:
 
     void terminate();
 
-    std::list<ModelVariable> variables() const;
-
-    ModelVariable get_variable(const std::string &name) const;
-
-    void update_variable(std::string name, GSMPType value);
+    const VariableManager &variables() const;
 
 private:
-    std::unordered_map<std::string, ModelVariable> _variables;
+    VariableManager _variables;
 };
 
 #endif // MODEL_H
