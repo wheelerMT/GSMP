@@ -39,8 +39,8 @@ endif ()
 include(FetchContent)
 
 # The compiled library code is here
-add_subdirectory(src/models/C)
-add_subdirectory(src/models/CPP)
+add_subdirectory(src/models/c)
+add_subdirectory(src/gsmp)
 
 # Executable code
 add_subdirectory(src/cli)

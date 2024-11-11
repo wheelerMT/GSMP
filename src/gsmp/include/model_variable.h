@@ -20,8 +20,7 @@ public:
     template<typename T>
     T get_value() const;
 
-    template<typename T>
-    void set_value(T new_value);
+    void set_value(const GSMPType &new_value);
 
     [[nodiscard]] std::string get_type_string() const;
 
@@ -30,6 +29,7 @@ public:
 
     [[nodiscard]] std::string name() const { return _name; }
     [[nodiscard]] ModelVariableIntent intent() const { return _intent; }
+    [[nodiscard]] const GSMPType &get_value() const { return _value; }
     [[nodiscard]] std::string description() const { return _description; }
 
 private:
