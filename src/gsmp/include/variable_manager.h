@@ -14,7 +14,8 @@ public:
 
     ModelVariable get_variable(const std::string &name) const;
 
-    void update_variable(const std::string &name, const GSMPType &value);
+    template<typename T>
+    void update_variable(const std::string &name, T value);
 
     void clear();
 

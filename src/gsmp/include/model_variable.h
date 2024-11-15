@@ -20,7 +20,8 @@ public:
     template<typename T>
     T get_value() const;
 
-    void set_value(const GSMPType &new_value);
+    template<typename T>
+    void set_value(T new_value);
 
     [[nodiscard]] std::string get_type_string() const;
 

@@ -1,7 +1,15 @@
 #include "model_variable.h"
+#include <format>
 #include <stdexcept>
 
-void ModelVariable::set_value(const GSMPType &new_value)
+template<typename T>
+T ModelVariable::get_value() const
+{
+    return _value;
+}
+
+template<typename T>
+void ModelVariable::set_value(const T new_value)
 {
     // Ensures new value matches the current type
     std::visit(
@@ -10,7 +18,7 @@ void ModelVariable::set_value(const GSMPType &new_value)
                 using NewType = std::decay_t<decltype(val)>;
                 if (!std::holds_alternative<NewType>(_value))
                 {
-                    throw std::runtime_error("Type mismatch in set_value");
+                    throw std::runtime_error(std::format("Value {} is not a supported GSMP type", val));
                 }
                 _value = val;
             },
