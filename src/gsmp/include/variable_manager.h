@@ -1,3 +1,5 @@
+#ifndef VARIABLE_MANAGER_H
+#define VARIABLE_MANAGER_H
 #include <list>
 #include <string>
 #include <unordered_map>
@@ -6,7 +8,7 @@
 class VariableManager {
 public:
     VariableManager() = default;
-    ~VariableManager();
+    ~VariableManager() = default;
 
     std::list<ModelVariable> variables() const;
 
@@ -22,3 +24,4 @@ public:
 private:
     std::unordered_map<std::string, ModelVariable> _variables;
 };
+#endif // VARIABLE_MANAGER_H
