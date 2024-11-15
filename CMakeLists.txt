@@ -1,5 +1,5 @@
-# Works with 3.15 and tested through 3.30
-cmake_minimum_required(VERSION 3.15...3.30)
+# Works with 3.15 and tested through 3.27
+cmake_minimum_required(VERSION 3.15...3.27)
 
 # Project name and a few useful settings. Other commands can pick up the results
 project(

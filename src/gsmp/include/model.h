@@ -1,5 +1,6 @@
 #ifndef MODEL_H
 #define MODEL_H
+#include <memory>
 #include "variable_manager.h"
 
 class Model {
@@ -14,12 +15,12 @@ public:
 
     void step();
 
-    void terminate();
+    void terminate() const;
 
-    const VariableManager &variables() const;
+    [[nodiscard]] const VariableManager *variables() const;
 
 private:
-    VariableManager _variables;
+    std::unique_ptr<VariableManager> _variables = std::make_unique<VariableManager>();
 };
 
 #endif // MODEL_H
