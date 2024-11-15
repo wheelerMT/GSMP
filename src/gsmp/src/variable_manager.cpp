@@ -34,7 +34,8 @@ ModelVariable VariableManager::get_variable(const std::string &name) const
     }
 }
 
-void VariableManager::update_variable(const std::string &name, const GSMPType &value)
+template<typename T>
+void VariableManager::update_variable(const std::string &name, const T value)
 {
     try
     {
