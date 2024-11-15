@@ -11,7 +11,7 @@ void Model::initialise()
 
 void Model::reinitialise()
 {
-    _variables.clear();
+    _variables->clear();
     initialise();
 }
 
@@ -20,6 +20,6 @@ void Model::step()
     // Step the model and update variables accordingly
 }
 
-void Model::terminate() { _variables.clear(); }
+void Model::terminate() const { _variables->clear(); }
 
-const VariableManager &Model::variables() const { return _variables; }
+const VariableManager *Model::variables() const { return _variables.get(); }
