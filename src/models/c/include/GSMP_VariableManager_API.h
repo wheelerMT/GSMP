@@ -2,7 +2,7 @@
 * FILENAME : GSMP_VariableManager_API.h
 *
 * DESCRIPTION : Declares external functions to implement the C API to
-*               CPP Class 'Model'.
+*               CPP Class 'VariableManager'.
 *
 /* ────────────────────────────────────────────────────────────────── */
 
@@ -25,53 +25,60 @@
 
 #if defined(_MSC_VER) && defined(GSMP_BUILD_SHARED)
 // Build as Windows Shared Library (.dll)
-#define GSMP_API GSMP_LINKAGE __declspec(dllexport)
+#define GSMP_VISIBILITY GSMP_LINKAGE __declspec(dllexport)
 #elif defined(_MSC_VER) && defined(GSMP_USE_SHARED)
 // Use as a Windows Shared Library (.dll)
-#define GSMP_API GSMP_LINKAGE __declspec(dllimport)
+#define GSMP_VISIBILITY GSMP_LINKAGE __declspec(dllimport)
 #elif defined(_MSC_VER) && defined(GSMP_BUILD_SHARED)
 // Build as Unix Shared Library (.so)
-#define GSMP_API GSMP_LINKAGE __attribute__((visibility("default")))
+#define GSMP_VISIBILITY GSMP_LINKAGE __attribute__((visibility("default")))
 #else
 // Visibility Unmodified, for Static Linkage (.lib)
-#define GSMP_API GSMP_LINKAGE
+#define GSMP_VISIBILITY GSMP_LINKAGE
 #endif
 
 /* ┌────────────────────────────────────────────────────────────────┐ */
-/* │                           GSMP MODEL                           │ */
+/* │                           RETURN CODE                          │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-#include "GSMP_model_types.h"
+#define GSMP_API GSMP_VISIBILITY ReturnCode
+
+/* ┌────────────────────────────────────────────────────────────────┐ */
+/* │                      GSMP VARIABLE MANAGER                     │ */
+/* └────────────────────────────────────────────────────────────────┘ */
+
+#include "GSMP_enums.h"
+#include "GSMP_types.h"
 
 // Opaque pointer to GSMP Variable Manager Instance
 typedef struct GSMP_Instance GSMP_Instance;
 
 // Model Instance Management
-GSMP_API int GSMP_Variable_Manager_Create(GSMP_Instance *instance);
+GSMP_API GSMP_VariableManager_Create(GSMP_Instance *instance);
 
-GSMP_API int GSMP_Variable_Manager_Destroy(GSMP_Instance *instance);
+GSMP_API GSMP_VariableManager_Destroy(GSMP_Instance *instance);
 
 // Model Variable Instantiation
-
+GSMP_API GSMP_VariableManager_AddVariable_Int(GSMP_Instance *instance, const string_t name, int_t *value,
+                                              VariableIntent *variableIntent, string_t description);
+GSMP_API GSMP_VariableManager_AddVariable_Single(GSMP_Instance *instance, string_t name, int_t *value,
+                                                 VariableIntent *intent, string_t description);
+GSMP_API GSMP_VariableManager_AddVariable_Double(GSMP_Instance *instance, string_t name, int_t *value,
+                                                 VariableIntent *intent, string_t description);
 
 // Model Variables (Runtime)
-GSMP_API int GSMP_Variable_Manager_GetVariableType(GSMP_Instance *instance, char *name, int *value);
+GSMP_API GSMP_VariableManager_GetVariableType(GSMP_Instance *instance, string_t name, int_t *value);
 
-GSMP_API int GSMP_Variable_Manager_GetVariableDescription(GSMP_Instance *instance, char *name, int *value);
+GSMP_API GSMP_VariableManager_GetVariableIntent(GSMP_Instance *instance, string_t name, VariableIntent *variableIntent);
 
-GSMP_API int GSMP_Variable_Manager_SetVariable_Int(GSMP_Instance *instance, char *name, int *value);
+GSMP_API GSMP_VariableManager_GetVariableDescription(GSMP_Instance *instance, string_t name, int_t *value);
 
-GSMP_API int GSMP_Variable_Manager_SetVariable_Float(GSMP_Instance *instance, char *name, float *value);
+GSMP_API GSMP_VariableManager_SetVariable_Int(GSMP_Instance *instance, string_t name, int_t *value);
+GSMP_API GSMP_VariableManager_SetVariable_Single(GSMP_Instance *instance, string_t name, single_t *value);
+GSMP_API GSMP_VariableManager_SetVariable_Double(GSMP_Instance *instance, string_t name, double_t *value);
 
-GSMP_API int GSMP_Variable_Manager_SetVariable_Double(GSMP_Instance *instance, char *name, double *value);
-
-GSMP_API int GSMP_Variable_Manager_GetVariable_Int(GSMP_Instance *instance, char *name, int *value);
-
-GSMP_API int GSMP_Variable_Manager_GetVariable_Float(GSMP_Instance *instance, char *name, float *value);
-
-GSMP_API int GSMP_Variable_Manager_GetVariable_Double(GSMP_Instance *instance, char *name, double *value);
-
-// ... TODO: GSMP Supported Types //
-// ... TODO: GSMP Supported Arrays //
+GSMP_API GSMP_VariableManager_GetVariable_Int(GSMP_Instance *instance, string_t name, int_t *value);
+GSMP_API GSMP_VariableManager_GetVariable_Single(GSMP_Instance *instance, string_t name, single_t *value);
+GSMP_API GSMP_VariableManager_GetVariable_Double(GSMP_Instance *instance, string_t name, double_t *value);
 
 #endif // GSMP_VARIABLE_MANAGER_API_H
