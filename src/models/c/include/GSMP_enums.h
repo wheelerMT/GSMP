@@ -1,5 +1,5 @@
 ﻿/* ────────────────────────────────────────────────────────────────── *
- * FILENAME : GSMP_model_types.h
+ * FILENAME : GSMP_enums.h
  *
  * DESCRIPTION : Defines all GSMP Enumerations used by:
  *               Model, VariableManager, & Variable.
