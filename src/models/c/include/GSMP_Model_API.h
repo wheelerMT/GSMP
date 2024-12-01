@@ -41,7 +41,8 @@
 /* │                           GSMP MODEL                           │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-#include "GSMP_model_types.h"
+#include "GSMP_enums.h"
+#include "GSMP_types.h"
 
 // Opaque pointer to GSMP Model Instance
 typedef struct GSMP_Instance GSMP_Instance;
