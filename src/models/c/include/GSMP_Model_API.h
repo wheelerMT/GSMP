@@ -1,10 +1,10 @@
 ﻿/* ────────────────────────────────────────────────────────────────── *
-* FILENAME : GSMP_Model_API.h
-*
-* DESCRIPTION : Declares external functions to implement the C API to
-*               CPP Class 'Model'.
-*
-/* ────────────────────────────────────────────────────────────────── */
+ * FILENAME : GSMP_Model_API.h
+ *
+ * DESCRIPTION : Declares external functions to implement the C API to
+ *               CPP Class 'Model'.
+ *
+ * ────────────────────────────────────────────────────────────────── */
 
 #ifndef GSMP_MODEL_API_H
 #define GSMP_MODEL_API_H
@@ -40,9 +40,6 @@
 /* ┌────────────────────────────────────────────────────────────────┐ */
 /* │                           GSMP MODEL                           │ */
 /* └────────────────────────────────────────────────────────────────┘ */
-
-#include "GSMP_enums.h"
-#include "GSMP_types.h"
 
 // Opaque pointer to GSMP Model Instance
 typedef struct GSMP_Instance GSMP_Instance;
