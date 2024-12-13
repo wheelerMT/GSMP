@@ -13,6 +13,7 @@
 /* │                         GSMP TYPES                             │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
+#include <stdbool.h>
 #include <stdint.h>
 
 // QUESTION: Use alias name style that is common to all our types that are enumerated?
