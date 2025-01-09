@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────────── *
-* FILENAME : GSMP_VariableManager_API.cpp
+* FILENAME : variable_manager.cpp
 *
 * DESCRIPTION : Defines Cpp functions to implement the C API to
 *               CPP Class 'VariableManager'.

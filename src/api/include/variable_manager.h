@@ -1,13 +1,13 @@
 /* ────────────────────────────────────────────────────────────────── *
- * FILENAME : GSMP_VariableManager_API.h
+ * FILENAME : variable_manager.h
  *
  * DESCRIPTION : Declares external functions to implement the C API to
  *               CPP Class 'VariableManager'.
  *
  * ────────────────────────────────────────────────────────────────── */
 
-#ifndef GSMP_VARIABLE_MANAGER_API_H
-#define GSMP_VARIABLE_MANAGER_API_H
+#ifndef VARIABLE_MANAGER_H
+#define VARIABLE_MANAGER_H
 
 /* ┌────────────────────────────────────────────────────────────────┐ */
 /* │                            LINKAGE                             │ */
@@ -82,4 +82,4 @@ GSMP_API GSMP_VariableManager_GetVariable_Int(GSMP_Instance *instance, string_t 
 GSMP_API GSMP_VariableManager_GetVariable_Single(GSMP_Instance *instance, string_t name, single_t *pValue);
 GSMP_API GSMP_VariableManager_GetVariable_Double(GSMP_Instance *instance, string_t name, double_t *pValue);
 
-#endif // GSMP_VARIABLE_MANAGER_API_H
+#endif // VARIABLE_MANAGER_H

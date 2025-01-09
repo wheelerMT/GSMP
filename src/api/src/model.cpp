@@ -1,5 +1,5 @@
 ﻿/* ────────────────────────────────────────────────────────────────── *
-* FILENAME : model.c
+* FILENAME : model_api.cpp
 *
 * DESCRIPTION : Defines external functions to implement the Model
 *               Interface for this specific Model.

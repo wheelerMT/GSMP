@@ -1,22 +1,22 @@
 /* ────────────────────────────────────────────────────────────────── *
- * FILENAME : GSMP_types.h
+ * FILENAME : types.h
  *
  * DESCRIPTION : Defines all GSMP Types used by:
  *               Model, VariableManager, & Variable.
  *
  *  ────────────────────────────────────────────────────────────────── */
 
-#ifndef GSMP_TYPES_H
-#define GSMP_TYPES_H
+#ifndef TYPES_H
+#define TYPES_H
 
 /* ┌────────────────────────────────────────────────────────────────┐ */
 /* │                         GSMP TYPES                             │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-#include <stdbool.h>
-#include <stdint.h>
 
 // QUESTION: Use alias name style that is common to all our types that are enumerated?
+#include <cstdint>
+
 typedef double double_t;
 typedef float single_t;
 typedef int8_t byte_t;
@@ -33,4 +33,4 @@ typedef char *string_t;
 // NULL for C, or use <stdlib. h>. For Cpp use nullptr.
 #define NULL ((void *) 0)
 
-#endif // GSMP_TYPES_H
+#endif // TYPES_H

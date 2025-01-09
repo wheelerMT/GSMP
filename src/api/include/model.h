@@ -1,13 +1,13 @@
 ﻿/* ────────────────────────────────────────────────────────────────── *
- * FILENAME : GSMP_Model_API.h
+ * FILENAME : model.h
  *
  * DESCRIPTION : Declares external functions to implement the C API to
  *               CPP Class 'Model'.
  *
  * ────────────────────────────────────────────────────────────────── */
 
-#ifndef GSMP_MODEL_API_H
-#define GSMP_MODEL_API_H
+#ifndef MODEL_H
+#define MODEL_H
 
 /* ┌────────────────────────────────────────────────────────────────┐ */
 /* │                            LINKAGE                             │ */
@@ -78,4 +78,4 @@ GSMP_API int GSMP_Model_GetVariable_Double(GSMP_Instance *instance, char *name, 
 // ... TODO: GSMP Supported Types //
 // ... TODO: GSMP Supported Arrays //
 
-#endif // GSMP_MODEL_API_H
+#endif // MODEL_H
