@@ -10,7 +10,7 @@
 /* │                           GSMP MODEL                           │ */
 /* └────────────────────────────────────────────────────────────────┘ */
 
-#include "GSMP_model.h"
+#include "GSMP_Model_API.h"
 #include "GSMP_model_types.h"
 
 // TODO: How to reference into this style of structure. For example
