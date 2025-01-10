@@ -1,13 +1,13 @@
 ﻿/* ────────────────────────────────────────────────────────────────── *
- * FILENAME : GSMP_enums.h
+ * FILENAME : enums.h
  *
  * DESCRIPTION : Defines all GSMP Enumerations used by:
  *               Model, VariableManager, & Variable.
  *
  *  ────────────────────────────────────────────────────────────────── */
 
-#ifndef GSMP_ENUMS_H
-#define GSMP_ENUMS_H
+#ifndef ENUMS_H
+#define ENUMS_H
 
 /* ┌────────────────────────────────────────────────────────────────┐ */
 /* │                      GSMP ENUMERATIONS                         │ */
@@ -32,4 +32,4 @@ typedef enum {
 
 typedef enum { OK = 0, ERROR = -1, PENDING = 1 } ReturnCode;
 
-#endif // GSMP_ENUMS_H
+#endif // ENUMS_H
