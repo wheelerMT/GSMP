@@ -9,34 +9,8 @@
 #ifndef VARIABLE_MANAGER_H
 #define VARIABLE_MANAGER_H
 
-#include "enums.h"
+#include "linkage.h"
 #include "types.h"
-
-// Determine linkage
-#if defined(__cplusplus)
-#define GSMP_LINKAGE extern "C"
-#else
-#define GSMP_LINKAGE extern
-#endif
-
-// Define how to build/use the library
-#if defined(_MSC_VER) && defined(GSMP_BUILD_SHARED)
-// Build as Windows Shared Library (.dll)
-#define GSMP_VISIBILITY GSMP_LINKAGE __declspec(dllexport)
-#elif defined(_MSC_VER) && defined(GSMP_USE_SHARED)
-// Use as a Windows Shared Library (.dll)
-#define GSMP_VISIBILITY GSMP_LINKAGE __declspec(dllimport)
-#elif defined(_MSC_VER) && defined(GSMP_BUILD_SHARED)
-// Build as Unix Shared Library (.so)
-#define GSMP_VISIBILITY GSMP_LINKAGE __attribute__((visibility("default")))
-#else
-// Visibility Unmodified, for Static Linkage (.lib)
-#define GSMP_VISIBILITY GSMP_LINKAGE
-#endif
-
-// Specify the ReturnCode used by the C API
-#define GSMP_API GSMP_VISIBILITY ReturnCode
-
 
 // Opaque pointer to GSMP Variable Manager Instance
 typedef struct GSMP_Instance GSMP_Instance;
