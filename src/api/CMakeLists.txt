@@ -1,5 +1,5 @@
 # Make an automatic shared library
-add_library(GSMP_API SHARED ${CMAKE_CURRENT_SOURCE_DIR}/model.cpp ${CMAKE_CURRENT_SOURCE_DIR}/variable_manager.cpp)
+add_library(GSMP_API SHARED ${CMAKE_CURRENT_SOURCE_DIR}/src/model.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/variable_manager.cpp)
 
 # We need this directory, and users of our library will need it too
 target_include_directories(GSMP_API PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
