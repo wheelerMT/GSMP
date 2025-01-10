@@ -399,3 +399,6 @@ FodyWeavers.xsd
 cmake-build-debug/
 cmake-build-release/
 build/
+
+# Google Test
+external/gtest/
