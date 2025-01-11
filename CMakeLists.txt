@@ -40,11 +40,11 @@ endif ()
 include(FetchContent)
 
 # The compiled library code is here
-add_subdirectory(src/api)
+#add_subdirectory(src/api)
 add_subdirectory(src/gsmp)
 
 # Executable code
-add_subdirectory(src/cli)
+#add_subdirectory(src/cli)
 
 # Testing only available if this is the main app
 # Emergency override MODERN_CMAKE_BUILD_TESTING provided as well
