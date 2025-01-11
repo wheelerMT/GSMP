@@ -25,6 +25,7 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     # since it calls enable_testing, which must be in the
     # main CMakeLists.
     include(CTest)
+    include(GoogleTest)
 
     # Docs only available if this is the main app
     find_package(Doxygen)
@@ -47,7 +48,13 @@ add_subdirectory(src/cli)
 
 # Testing only available if this is the main app
 # Emergency override MODERN_CMAKE_BUILD_TESTING provided as well
-#if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING)
-#        AND BUILD_TESTING)
-#    add_subdirectory(test)
-#endif()
+ if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING)
+        AND BUILD_TESTING)
+
+    # Add the Google Test library
+    add_subdirectory(external/gtest)
+
+    # Add test modules
+    add_subdirectory(test/unit)
+
+ endif()
