@@ -11,6 +11,7 @@
     "docs/PlantUML/diagrams/src"
   ],
   "cSpell.words": [
-    "GSMP"
+    "GSMP",
+    "gtest"
   ]
 }
